@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "913183227015",
+    "project_id": "naffeth-50cae",
+    "storage_bucket": "naffeth-50cae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:913183227015:android:71a48cf1c9ec51f81bcc22",
+        "android_client_info": {
+          "package_name": "com.osoolsystems.naffith"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuVA_HurMWXsK4sC-xWXxzJPy7UpHBffM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
