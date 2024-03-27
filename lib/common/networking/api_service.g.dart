@@ -22,7 +22,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<LoginResponse> login(LoginRequestBody loginRequestBody) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -50,10 +50,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<AllRealEstatesResponseBody> getAllRealEstatesSale() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<AllRealEstatesResponseBody>(Options(
       method: 'GET',
@@ -77,10 +77,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<AllRealEstatesResponseBody> getAllRealEstatesBuy() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<AllRealEstatesResponseBody>(Options(
       method: 'GET',
@@ -104,10 +104,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<AllRealEstatesResponseBody> getAllRealEstates() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<AllRealEstatesResponseBody>(Options(
       method: 'GET',
@@ -131,7 +131,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<AllRealEstatesResponseBody> getAllFavorites(String Bearer) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -139,7 +139,7 @@ class _ApiService implements ApiService {
       r'Authorization': Bearer,
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<AllRealEstatesResponseBody>(Options(
       method: 'GET',
@@ -164,7 +164,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<MyRealEstatesResponse> getMyRealEstatesBuy(String Bearer) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -172,7 +172,7 @@ class _ApiService implements ApiService {
       r'Authorization': Bearer,
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MyRealEstatesResponse>(Options(
       method: 'GET',
@@ -197,7 +197,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<MyRealEstatesResponse> getMyRealEstatesSales(String Bearer) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -205,7 +205,7 @@ class _ApiService implements ApiService {
       r'Authorization': Bearer,
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MyRealEstatesResponse>(Options(
       method: 'GET',
@@ -230,14 +230,14 @@ class _ApiService implements ApiService {
 
   @override
   Future<SocialMediaResponseBody> getSocialMedia() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
       r'Content-Type': 'application/json',
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<SocialMediaResponseBody>(Options(
       method: 'GET',
@@ -262,14 +262,14 @@ class _ApiService implements ApiService {
 
   @override
   Future<CommanQuestionsResponseBody> getCommanQuestions() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
       r'Content-Type': 'application/json',
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<CommanQuestionsResponseBody>(Options(
       method: 'GET',
@@ -294,14 +294,14 @@ class _ApiService implements ApiService {
 
   @override
   Future<UserTermsResponseBody> getUserTerms() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
       r'Content-Type': 'application/json',
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<UserTermsResponseBody>(Options(
       method: 'GET',
@@ -326,14 +326,14 @@ class _ApiService implements ApiService {
 
   @override
   Future<PrivacyPolicyResponseBody> getPrivacyPolicy() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
       r'Content-Type': 'application/json',
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<PrivacyPolicyResponseBody>(Options(
       method: 'GET',
@@ -358,14 +358,14 @@ class _ApiService implements ApiService {
 
   @override
   Future<AboutUsResponseBody> getAboutUs() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
       r'Content-Type': 'application/json',
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<AboutUsResponseBody>(Options(
       method: 'GET',
@@ -393,7 +393,7 @@ class _ApiService implements ApiService {
     File faal_document,
     String Bearer,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -437,7 +437,7 @@ class _ApiService implements ApiService {
     String _method,
     String Bearer,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -482,7 +482,7 @@ class _ApiService implements ApiService {
     String _method,
     String Bearer,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -517,14 +517,14 @@ class _ApiService implements ApiService {
 
   @override
   Future<CategoryResponseBody> getCategory() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
       r'Content-Type': 'multipart/form-data',
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<CategoryResponseBody>(Options(
       method: 'GET',
@@ -549,14 +549,14 @@ class _ApiService implements ApiService {
 
   @override
   Future<StateResponse> getStatesList() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
       r'Content-Type': 'multipart/form-data',
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<StateResponse>(Options(
       method: 'GET',
@@ -581,14 +581,14 @@ class _ApiService implements ApiService {
 
   @override
   Future<OneRealEstateResponse> getOneRealEstate(String id) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
       r'Content-Type': 'multipart/form-data',
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<OneRealEstateResponse>(Options(
       method: 'GET',
@@ -617,7 +617,7 @@ class _ApiService implements ApiService {
     String _method,
     String Bearer,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -652,7 +652,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<GetFaalResponseBody> getFaal(String Bearer) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -660,7 +660,7 @@ class _ApiService implements ApiService {
       r'Authorization': Bearer,
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<GetFaalResponseBody>(Options(
       method: 'GET',
@@ -690,7 +690,7 @@ class _ApiService implements ApiService {
     String private_note,
     String Bearer,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -732,7 +732,7 @@ class _ApiService implements ApiService {
     String id,
     String Bearer,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -740,7 +740,7 @@ class _ApiService implements ApiService {
       r'Authorization': Bearer,
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'GET',
       headers: _headers,
@@ -765,7 +765,7 @@ class _ApiService implements ApiService {
     String id,
     String Bearer,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -773,7 +773,7 @@ class _ApiService implements ApiService {
       r'Authorization': Bearer,
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'GET',
       headers: _headers,
@@ -800,7 +800,7 @@ class _ApiService implements ApiService {
     String order_status,
     String Bearer,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -842,7 +842,7 @@ class _ApiService implements ApiService {
     String id,
     String Bearer,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -850,7 +850,7 @@ class _ApiService implements ApiService {
       r'Authorization': Bearer,
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'GET',
       headers: _headers,
@@ -875,7 +875,7 @@ class _ApiService implements ApiService {
     String real_estate_id,
     String Bearer,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -912,14 +912,14 @@ class _ApiService implements ApiService {
 
   @override
   Future<List<UsersResponseBody>> getUsers() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
       r'Content-Type': 'multipart/form-data',
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<List<dynamic>>(_setStreamType<List<UsersResponseBody>>(Options(
       method: 'GET',
@@ -952,7 +952,7 @@ class _ApiService implements ApiService {
     int agent_id,
     String Bearer,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -997,14 +997,14 @@ class _ApiService implements ApiService {
 
   @override
   Future<CitiesResponseBody> getCitiesList(String id) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
       r'Content-Type': 'multipart/form-data',
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<CitiesResponseBody>(Options(
       method: 'GET',
@@ -1029,7 +1029,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<OrderResponseGoal> getOrderSaleList(String Bearer) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -1037,7 +1037,7 @@ class _ApiService implements ApiService {
       r'Authorization': Bearer,
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<OrderResponseGoal>(Options(
       method: 'GET',
@@ -1062,7 +1062,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<OrderResponseGoal> getMyOrderBuyList(String Bearer) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -1070,7 +1070,7 @@ class _ApiService implements ApiService {
       r'Authorization': Bearer,
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<OrderResponseGoal>(Options(
       method: 'GET',
@@ -1098,7 +1098,7 @@ class _ApiService implements ApiService {
     String id,
     String Bearer,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -1106,7 +1106,7 @@ class _ApiService implements ApiService {
       r'Authorization': Bearer,
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ContractorsResponseBody>(Options(
       method: 'GET',
@@ -1136,7 +1136,7 @@ class _ApiService implements ApiService {
     String type,
     String Bearer,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -1181,7 +1181,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<OrderResponseGoal> getUsersSaleOrderList(String Bearer) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -1189,7 +1189,7 @@ class _ApiService implements ApiService {
       r'Authorization': Bearer,
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<OrderResponseGoal>(Options(
       method: 'GET',
@@ -1214,7 +1214,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<OrderResponseGoal> getUsersBuyOrderList(String Bearer) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -1222,7 +1222,7 @@ class _ApiService implements ApiService {
       r'Authorization': Bearer,
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<OrderResponseGoal>(Options(
       method: 'GET',
@@ -1250,7 +1250,7 @@ class _ApiService implements ApiService {
     String real_estate_id,
     String Bearer,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -1291,7 +1291,7 @@ class _ApiService implements ApiService {
     String _method,
     String Bearer,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
@@ -1326,6 +1326,53 @@ class _ApiService implements ApiService {
           _dio.options.baseUrl,
           baseUrl,
         ))));
+  }
+
+  @override
+  Future<List<FilterRealEstateResponse>> getFilteredRealEstates({
+    String? goal,
+    int? stateId,
+    int? cityId,
+    int? priceFrom,
+    int? priceTo,
+    int? areaFrom,
+    int? areaTo,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'goal': goal,
+      r'state_id': stateId,
+      r'city_id': cityId,
+      r'price_from': priceFrom,
+      r'price_to': priceTo,
+      r'area_from': areaFrom,
+      r'area_to': areaTo,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<FilterRealEstateResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/real-estates/filter/params',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var value = _result.data!
+        .map((dynamic i) =>
+            FilterRealEstateResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

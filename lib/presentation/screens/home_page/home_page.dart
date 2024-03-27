@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:naffith/common/values/colors.dart';
+import 'package:naffith/presentation/screens/filter/logic/filter_cubit.dart';
 import 'package:naffith/presentation/screens/home_page/data/models/all_real_estates_response_body.dart';
 import 'package:naffith/presentation/screens/home_page/logic/all_real_estate/all_real_estates_list_cubit.dart';
 import 'package:naffith/presentation/screens/home_page/logic/all_real_estates_cubit.dart';
@@ -102,6 +103,7 @@ class _HomePageState extends State<HomePage> {
     context.read<StateCubit>().emitCategoryStates();
     context.read<AllRealEstatesBuyCubit>().emitAllRealEstateBuyStates();
     context.read<AllRealEstatesListCubit>().emitAllRealEstateListStates();
+    context.read<EstateFilterCubit>().emitAllEstatesFilterStates();
   }
 
   // void _onSearchTextChanged(String text) {

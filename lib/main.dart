@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +9,7 @@ import 'package:naffith/common/values/colors.dart';
 import 'common/di/dependency_injection.dart';
 import 'common/routes/routes.dart';
 import 'common/values/constants_design.dart';
+import 'firebase_options.dart';
 import 'global.dart';
 
 Future<void> main() async {
@@ -20,6 +22,9 @@ Future<void> main() async {
       systemNavigationBarColor: Color.fromRGBO(23, 56, 61, 1), // navigation bar color
       statusBarColor: Color.fromRGBO(23, 56, 61, 1)
   ));
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 }
 
 class MyApp extends StatelessWidget {

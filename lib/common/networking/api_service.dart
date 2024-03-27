@@ -1,11 +1,8 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart' hide Headers;
 import 'package:naffith/common/cities/data/models/cities_response.dart';
 import 'package:naffith/common/report/data/models/report_response.dart';
 import 'package:naffith/presentation/screens/about_us_page/data/models/about_us_response.dart';
-import 'package:naffith/presentation/screens/add_advertisements/data/models/add_real_estates_request_model.dart';
-import 'package:naffith/presentation/screens/add_advertisements/data/models/add_real_estates_response_model.dart';
 import 'package:naffith/presentation/screens/comman_questions_page/data/models/comman_questions_response.dart';
 import 'package:naffith/presentation/screens/my_advertisements/data/models/my_real_estates_model.dart';
 import 'package:naffith/presentation/screens/my_orders/data/models/contractors_response_body.dart';
@@ -27,7 +24,7 @@ import '../category/data/models/category_response_body.dart';
 import '../state_list/data/models/state_response.dart';
 import '../users_data/Data/models/users_response_body.dart';
 import 'api_constants.dart';
-
+import '../../presentation/screens/filter/data/models/filter_real_estate_respone.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.apiBaseUrl)
@@ -394,4 +391,16 @@ abstract class ApiService {
       @Part() String real_estate_id,
       @Part() String _method,
       @Header('Authorization') String Bearer);
+  /////////////////////////////////////////////////////////////
+// Filter
+  @GET("/real-estates/filter/params")
+  Future<List<FilterRealEstateResponse>> getFilteredRealEstates({
+    @Query('goal') String? goal,
+    @Query('state_id') int? stateId,
+    @Query('city_id') int? cityId,
+    @Query('price_from') int? priceFrom,
+    @Query('price_to') int? priceTo,
+    @Query('area_from') int? areaFrom,
+    @Query('area_to') int? areaTo,
+  });
 }
