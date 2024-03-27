@@ -23,6 +23,7 @@ import '../../../common/widgets/login_alert.dart';
 import '../../../global.dart';
 import '../add_advertisements/widgets/inter_face_dialog.dart';
 import '../add_advertisements/widgets/reusable_dropdown_with_text.dart';
+import '../filter/widgets/filter_bloc_listener.dart';
 import '../profile/profile_page.dart';
 import 'logic/buy/all_real_estates_buy_cubit.dart';
 import 'logic/buy/all_real_estates_buy_states.dart';
@@ -103,7 +104,7 @@ class _HomePageState extends State<HomePage> {
     context.read<StateCubit>().emitCategoryStates();
     context.read<AllRealEstatesBuyCubit>().emitAllRealEstateBuyStates();
     context.read<AllRealEstatesListCubit>().emitAllRealEstateListStates();
-    context.read<EstateFilterCubit>().emitAllEstatesFilterStates();
+    // context.read<EstateFilterCubit>().emitAllEstatesFilterStates();
   }
 
   // void _onSearchTextChanged(String text) {
@@ -404,26 +405,26 @@ class _HomePageState extends State<HomePage> {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Padding(
-                                          padding:  EdgeInsets.only(right: 5.w),
-                                          child: InterfaceListAlertDialogWithoutTilte(
-                                            stringList: ['بنك', "كاش",],
-                                            title: 'التمويل',
-                                            selectedItems: tamoyl,
-                                          ),
-                                        ),
-                                        PropertyTypeDropdownWithOutTitle(
-                                            selectedValue: categoryValue,
-                                            textWidgetString: 'نوع العقار',
-                                            items: context.read<CategoryCubit>().names,
-                                            onChanged: (String? value) {
-                                              setStateSB(() {
-                                                categoryValue = value;
-                                                context
-                                                    .read<CategoryCubit>()
-                                                    .getCategoryID(name: value);
-                                              });
-                                            }),
+                                        // Padding(
+                                        //   padding:  EdgeInsets.only(right: 5.w),
+                                        //   child: InterfaceListAlertDialogWithoutTilte(
+                                        //     stringList: ['بنك', "كاش",],
+                                        //     title: 'التمويل',
+                                        //     selectedItems: tamoyl,
+                                        //   ),
+                                        // ),
+                                        // PropertyTypeDropdownWithOutTitle(
+                                        //     selectedValue: categoryValue,
+                                        //     textWidgetString: 'نوع العقار',
+                                        //     items: context.read<CategoryCubit>().names,
+                                        //     onChanged: (String? value) {
+                                        //       setStateSB(() {
+                                        //         categoryValue = value;
+                                        //         context
+                                        //             .read<CategoryCubit>()
+                                        //             .getCategoryID(name: value);
+                                        //       });
+                                        //     }),
                                       ],
                                     ),
                                   ),
@@ -720,6 +721,19 @@ class _HomePageState extends State<HomePage> {
                                   GestureDetector(
                                     onTap: () {
                                       Navigator.pop(context);
+                                      context.read<EstateFilterCubit>().emitAllEstatesFilterStates(
+                                       // goal: '',
+                                        priceFrom: int.tryParse(_postPriceStartController.text),
+                                        priceTo: int.tryParse(_postPriceEndController.text),
+                                        stateId: context
+                                            .read<StateCubit>().id != 0 ? context
+                                            .read<StateCubit>().id : null,
+                                        cityId: context
+                                            .read<CitiesCubit>().id != 0 ? context
+                                            .read<CitiesCubit>().id: null,
+                                        areaFrom: int.tryParse(_areaStartController.text),
+                                        areaTo: int.tryParse(_areaEndController.text),
+                                      );
                                     },
                                     child: Container(
                                       margin: EdgeInsets.only(
@@ -1094,6 +1108,7 @@ class _HomePageState extends State<HomePage> {
                   )
                 ],
               )),
+              const FilterBlocListener(),
         ])),
       ),
     );
