@@ -465,7 +465,6 @@ class SettingsPage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: (){
-
                     if(Global.storageService.getIsLoggedIn()) {
                       Navigator.of(context).push(
                         MaterialPageRoute(

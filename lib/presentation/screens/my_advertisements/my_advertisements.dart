@@ -567,25 +567,7 @@ class _MyAdvertisementsState extends State<MyAdvertisements> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      if(Global.storageService.getIsLoggedIn == true && context.read<GetFaalCubit>().isHaveFaal == true) {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const OptionPage(),
-                          ),
-                        );
-                      } else if( Global.storageService.getIsLoggedIn == true && context.read<GetFaalCubit>().isHaveFaal == false) {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AddFaalAlertDialog();
-                            });
-                      }else{
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return LoginAlertDialog();
-                            });
-                      }
+                      checkLoginAndNavigate(context);
                     },
                     child: Container(
                       width: 239.w,
@@ -621,6 +603,38 @@ class _MyAdvertisementsState extends State<MyAdvertisements> {
           ),
         ));
   }
+  // Assuming Global.storageService.getIsLoggedIn returns a Future<bool>
+
+  Future<void> checkLoginAndNavigate(BuildContext context) async {
+    bool isLoggedIn = await Global.storageService.getIsLoggedIn();
+    bool hasFaal = context.read<GetFaalCubit>().isHaveFaal;
+
+    print("isLoggedIn: $isLoggedIn");
+    print("hasFaal: $hasFaal");
+
+    if (isLoggedIn && hasFaal) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const OptionPage(),
+        ),
+      );
+    } else if (isLoggedIn && !hasFaal) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AddFaalAlertDialog();
+        },
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return LoginAlertDialog();
+        },
+      );
+    }
+  }
+
 }
 
 

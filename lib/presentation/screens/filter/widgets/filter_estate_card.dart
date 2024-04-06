@@ -1,22 +1,18 @@
+
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:naffith/presentation/screens/advertisements_info/Cubit/one_real_estate_cubit.dart';
-import 'package:share_plus/share_plus.dart';
+import 'package:naffith/presentation/screens/filter/data/models/filter_real_estate_respone.dart';
 
 import '../../../../common/values/colors.dart';
 import '../../advertisements_info/advertisement_details_page.dart';
-import '../../my_advertisements_buy_info/my_advertisement_info_page.dart';
-import '../data/models/my_real_estates_model.dart';
-class MyAdvertisementSaleCard extends StatefulWidget {
-  final List<Data>? allRealEstatesResponseBody;
+
+class FilterCard extends StatefulWidget {
+  final List<Data> allRealEstatesResponseBody;
   final int index;
 
-  const MyAdvertisementSaleCard({
-    super.key,
-    required this.allRealEstatesResponseBody,
-    required this.index,
+  const FilterCard({
+    super.key, required this.allRealEstatesResponseBody, required this.index,
   });
   String getUserType (String Type) {
     switch (Type) {
@@ -25,31 +21,27 @@ class MyAdvertisementSaleCard extends StatefulWidget {
       case 'seller_agent':
         return 'وسيط بائع';
       case 'buyer':
-
         return 'مشتري';
       case 'buyer_agent':
         return 'وسيط مشتري';
       default:
-        ;
         return 'غير معروف';
     }
   }
+
   @override
-  State<MyAdvertisementSaleCard> createState() => _MyAdvertisementSaleCardState();
+  State<FilterCard> createState() => _FilterCardState();
 }
 
-class _MyAdvertisementSaleCardState extends State<MyAdvertisementSaleCard> {
+class _FilterCardState extends State<FilterCard> {
+  bool isFavorited = true; // Initially set to false
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        context.read<OneRealEstateCubit>().emitOneRealEstateStates(id: widget.allRealEstatesResponseBody?[widget.index].id.toString() ??'0' );
+      onTap: (){
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => MyAdvertisementsInfoPage(
-                id: widget.allRealEstatesResponseBody![widget.index].id
-                    .toString()),
-
+            builder: (context) => AdvertisementDetails(id: widget.allRealEstatesResponseBody[widget.index].id.toString(),isHisAd : true , isHeCanOrder: true, isOrdered: false,),
           ),
         );
       },
@@ -80,11 +72,11 @@ class _MyAdvertisementSaleCardState extends State<MyAdvertisementSaleCard> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: ClipRRect(
+                    child:  ClipRRect(
                       borderRadius: BorderRadius.circular(10.0),
                       child: Image.network(
-                        widget.allRealEstatesResponseBody![widget.index].images?.isNotEmpty ?? false
-                            ? widget.allRealEstatesResponseBody![widget.index].images![0].url ?? ""
+                        widget.allRealEstatesResponseBody[widget.index].images?.isNotEmpty ?? false
+                            ? widget.allRealEstatesResponseBody[widget.index].images![0].url ?? ""
                             : "", // Accessing the URL only if it's not null and the list is not empty
                         fit: BoxFit.cover,
                         loadingBuilder: (context, child, loadingProgress) {
@@ -97,7 +89,8 @@ class _MyAdvertisementSaleCardState extends State<MyAdvertisementSaleCard> {
                         },
                       ),
                     ),
-                  ),
+                    ),
+
 
                   Container(
                     padding: EdgeInsets.only(right: 10.h),
@@ -105,20 +98,7 @@ class _MyAdvertisementSaleCardState extends State<MyAdvertisementSaleCard> {
                     width: 225.w,
                     child: Stack(
                       children: [
-                        Positioned(
-                          bottom: 86.h,
-                          right: 174.w,
-                          child: IconButton(
-                            onPressed: () async {
-                              await   Share.share('check out my ads at https://example.com');
-                            },
-                            icon: const Icon(
-                              Icons.share,
-                              color
-                                  : AppColors.primaryBackground,
-                            ),
-                          ),
-                        ),
+
                         Container(
                           margin: EdgeInsets.all(8.sp),
                           child: Column(
@@ -136,7 +116,7 @@ class _MyAdvertisementSaleCardState extends State<MyAdvertisementSaleCard> {
                                           fontWeight: FontWeight.w500,
                                         )),
                                   ),
-                                  Text('${widget.allRealEstatesResponseBody![widget.index].price} ريال',
+                                  Text('${widget.allRealEstatesResponseBody[widget.index].price} ريال',
                                     style: GoogleFonts.almarai(
                                         textStyle: TextStyle(
                                           color: AppColors.primaryBackground,
@@ -182,7 +162,7 @@ class _MyAdvertisementSaleCardState extends State<MyAdvertisementSaleCard> {
                                           fontWeight: FontWeight.w500,
                                         )),
                                   ),
-                                  Text(widget.allRealEstatesResponseBody![widget.index].subType ?? "",
+                                  Text(widget.allRealEstatesResponseBody[widget.index].subType ?? "",
                                     style: GoogleFonts.almarai(
                                         textStyle: TextStyle(
                                           color: AppColors.primaryBackground,
@@ -194,7 +174,7 @@ class _MyAdvertisementSaleCardState extends State<MyAdvertisementSaleCard> {
                                 ],
                               ),
 
-                              if(widget.allRealEstatesResponseBody![widget.index].type != 'land')
+                              if(widget.allRealEstatesResponseBody[widget.index].type != 'land')
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
@@ -207,7 +187,7 @@ class _MyAdvertisementSaleCardState extends State<MyAdvertisementSaleCard> {
                                             fontWeight: FontWeight.w500,
                                           )),
                                     ),
-                                    Text('${widget.allRealEstatesResponseBody![widget.index].age ?? 0} سنوات ',
+                                    Text('${widget.allRealEstatesResponseBody[widget.index].age ?? 0} سنوات ',
                                       style: GoogleFonts.almarai(
                                           textStyle: TextStyle(
                                             color: AppColors.primaryBackground,
@@ -230,7 +210,7 @@ class _MyAdvertisementSaleCardState extends State<MyAdvertisementSaleCard> {
                                           fontWeight: FontWeight.w500,
                                         )),
                                   ),
-                                  Text('${widget.allRealEstatesResponseBody![widget.index].state!.name ?? "غير محدد"}',
+                                  Text('${widget.allRealEstatesResponseBody[widget.index].state!.name ?? "غير محدد"}',
                                     style: GoogleFonts.almarai(
                                         textStyle: TextStyle(
                                           color: AppColors.primaryBackground,
@@ -253,7 +233,7 @@ class _MyAdvertisementSaleCardState extends State<MyAdvertisementSaleCard> {
                                           fontWeight: FontWeight.w500,
                                         )),
                                   ),
-                                  Text('${widget.allRealEstatesResponseBody![widget.index].city!.name ?? ""}',
+                                  Text('${widget.allRealEstatesResponseBody[widget.index].city!.name ?? ""}',
                                     style: GoogleFonts.almarai(
                                         textStyle: TextStyle(
                                           color: AppColors.primaryBackground,
@@ -267,7 +247,7 @@ class _MyAdvertisementSaleCardState extends State<MyAdvertisementSaleCard> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end ,
                                 children: [
-                                  Text(widget.allRealEstatesResponseBody![widget.index].announcementTime ?? "غير موجود",
+                                  Text(widget.allRealEstatesResponseBody[widget.index].announcementTime ?? "غير موجود",
                                     style: GoogleFonts.almarai(
                                         textStyle: TextStyle(
                                           color: const Color.fromRGBO(106, 115, 128, 1),
@@ -303,7 +283,7 @@ class _MyAdvertisementSaleCardState extends State<MyAdvertisementSaleCard> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${widget.allRealEstatesResponseBody![widget.index].id}',
+                              '${widget.allRealEstatesResponseBody[widget.index].id}',
                               style: GoogleFonts.almarai(
                                   textStyle: TextStyle(
                                     color: const Color.fromRGBO(13, 11, 12, 1),
@@ -312,7 +292,7 @@ class _MyAdvertisementSaleCardState extends State<MyAdvertisementSaleCard> {
                                     fontWeight: FontWeight.w700,
                                   )),
                             ),Text(
-                              widget.getUserType(widget.allRealEstatesResponseBody![widget.index].adjectiveAdvertiser ?? ""),
+                              widget.getUserType(widget.allRealEstatesResponseBody[widget.index].adjectiveAdvertiser ?? ""),
                               style: GoogleFonts.almarai(
                                   textStyle: TextStyle(
                                     color: const Color.fromRGBO(106, 115, 128, 1),

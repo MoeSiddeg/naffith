@@ -21,6 +21,8 @@ import 'package:naffith/presentation/screens/comman_questions_page/Cubit/comman_
 import 'package:naffith/presentation/screens/comman_questions_page/data/repo/comman_questions_repo.dart';
 import 'package:naffith/presentation/screens/favorite_advertisements/data/repo/all_favorites_repo.dart';
 import 'package:naffith/presentation/screens/favorite_advertisements/logic/all_favorites_cubit.dart';
+import 'package:naffith/presentation/screens/filter/data/repo/filter_repo.dart';
+import 'package:naffith/presentation/screens/filter/logic/filter_cubit.dart';
 import 'package:naffith/presentation/screens/home_page/data/repos/all_real_estates_repo.dart';
 import 'package:naffith/presentation/screens/home_page/logic/all_real_estates_cubit.dart';
 import 'package:naffith/presentation/screens/home_page/logic/buy/all_real_estates_buy_cubit.dart';
@@ -178,4 +180,7 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<DeleteFavoritesCubit>(() => DeleteFavoritesCubit(getIt()));
   // all real estate list
   getIt.registerLazySingleton<AllRealEstatesListCubit>(() => AllRealEstatesListCubit(getIt()));
+  // filter real estates
+  getIt.registerLazySingleton<EstateFilterCubit>(() => EstateFilterCubit(getIt()));
+  getIt.registerLazySingleton<EstateFilterRepo>(() => EstateFilterRepo(getIt()));
 }

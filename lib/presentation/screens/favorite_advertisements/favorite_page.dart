@@ -350,7 +350,26 @@ class _AdvertisementCardState extends State<AdvertisementCard> {
                     width: 225.w,
                     child: Stack(
                       children: [
+                        Positioned(
+                          bottom: 86.h,
+                          right: 174.w,
+                          child: IconButton(
+                            onPressed: () {
+                              debugPrint(isFavorited.toString());
+                              context.read<DeleteFavoritesCubit>().emitDeleteFavoritesStates(id:  widget.allRealEstatesResponseBody![widget.index].id
+                                  .toString());
 
+                            },
+                            icon: Icon(
+                              isFavorited
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
+                              color: isFavorited
+                                  ? Colors.red
+                                  : AppColors.primaryBackground,
+                            ),
+                          ),
+                        ),
                         Container(
                           margin: EdgeInsets.all(8.sp),
                           child: Column(

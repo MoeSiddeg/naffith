@@ -10,6 +10,7 @@ import 'package:naffith/presentation/screens/advertisements_info/Cubit/one_real_
 import 'package:naffith/presentation/screens/application/application_page.dart';
 import 'package:naffith/presentation/screens/application/bloc/app_blocs.dart';
 import 'package:naffith/presentation/screens/favorite_advertisements/logic/all_favorites_cubit.dart';
+import 'package:naffith/presentation/screens/filter/logic/filter_cubit.dart';
 import 'package:naffith/presentation/screens/home_page/logic/all_real_estates_cubit.dart';
 import 'package:naffith/presentation/screens/home_page/logic/buy/all_real_estates_buy_cubit.dart';
 import 'package:naffith/presentation/screens/home_page/logic/delete_from_favorites/delete_favorites_cubit.dart';
@@ -269,6 +270,12 @@ class AppPages {
           page: const AddAdvertisementPage(),
           bloc: BlocProvider(
             create: (_) => getIt<AllRealEstatesListCubit>(),
+          )),
+      PageEntity(
+          route: AppRoutes.ADD_APPLICATION,
+          page: const AddAdvertisementPage(),
+          bloc: BlocProvider(
+            create: (_) => getIt<EstateFilterCubit>(),
           )),
     ];
   }

@@ -571,67 +571,68 @@ class _AdvertisementDetailsState extends State<AdvertisementDetails> {
                             ),
                           ],
                         ),
-                      if (widget.isHisAd == false)
-                        Padding(
-                          padding: EdgeInsets.only(
-                              right: 10.w, top: 10.h, bottom: 10.h),
-                          child: Row(
+                      Padding(
+                        padding: EdgeInsets.only(
+                            right: 10.w, top: 10.h, bottom: 10.h),
+                        child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              IconButton(
-                                  onPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return ChangePrivateNoteAlertDialog(
-                                            id: '${oneRealEstateResponse.data!.id}',
-                                          );
-                                        });
+                              if (widget.isHisAd == false) ...[
+                                IconButton(
+                                    onPressed: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return ChangePrivateNoteAlertDialog(
+                                              id: '${oneRealEstateResponse.data!.id}',
+                                            );
+                                          });
+                                    },
+                                    icon: Icon(
+                                      Icons.block,
+                                      color: Colors.red,
+                                      size: widget.isHisAd ? 0 : 30.sp,
+                                    ))
+                              ],
+                              if (widget.isOrdered == true) ...[
+                                GestureDetector(
+                                  onTap: () async {
+                                    // The phone number you want to send the message to (including the country code)
+                                    String phoneNumber = widget.Number;
+
+                                    // The message you want to send
+                                    String message = 'مرحبا';
+
+                                    // Construct the WhatsApp URL
+                                    String url =
+                                        'https://wa.me/$phoneNumber?text=${Uri.parse(message)}';
+
+                                    // Check if the WhatsApp app is installed
+                                    if (await canLaunch(url)) {
+                                      // Open WhatsApp with the pre-filled message
+                                      await launch(url);
+                                    } else {
+                                      // Handle the case where WhatsApp is not installed
+                                      throw 'Could not launch WhatsApp.';
+                                    }
                                   },
-                                  icon: Icon(
-                                    Icons.block,
-                                    color: Colors.red,
-                                    size: widget.isHisAd ? 0 : 30.sp,
-                                  ))
-                            ],
-                          ),
-                        ),
-                      if (widget.isOrdered == true)
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                              onTap: () async {
-                                // The phone number you want to send the message to (including the country code)
-                                String phoneNumber = widget.Number;
-
-                                // The message you want to send
-                                String message = 'مرحبا';
-
-                                // Construct the WhatsApp URL
-                                String url =
-                                    'https://wa.me/$phoneNumber?text=${Uri.parse(message)}';
-
-                                // Check if the WhatsApp app is installed
-                                if (await canLaunch(url)) {
-                                  // Open WhatsApp with the pre-filled message
-                                  await launch(url);
-                                } else {
-                                  // Handle the case where WhatsApp is not installed
-                                  throw 'Could not launch WhatsApp.';
-                                }
-                              },
-                              child: SizedBox(
-                                height: 20.h,
-                                width: 20.w,
-                                child: Image.asset(
-                                  'assets/icons/whatsapp.png',
-                                  fit: BoxFit.contain,
+                                  child: SizedBox(
+                                    height: 30.h,
+                                    width: 30.w,
+                                    child: Image.asset(
+                                      'assets/icons/whatsapp.png',
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ],
-                        ),
+                              ],
+                            ]),
+                      ),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [],
+                      ),
                       const ReportRealEstatesBlocListener(),
                     ],
                   )),

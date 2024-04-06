@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +17,7 @@ import 'package:naffith/presentation/screens/add_advertisements/widgets/add_real
 import 'package:naffith/presentation/screens/add_advertisements/widgets/large_drop_down.dart';
 import 'package:naffith/presentation/screens/add_advertisements/widgets/reusable_dropdown_with_text.dart';
 import 'package:naffith/presentation/screens/add_advertisements/widgets/reusable_property_field.dart';
+import 'package:naffith/presentation/screens/add_advertisements/widgets/street_drop_down.dart';
 import 'package:naffith/presentation/screens/profile/logic/get_faal_cubit.dart';
 import '../../../common/values/constants_design.dart';
 import '../../../common/widgets/interface_container.dart';
@@ -46,6 +48,46 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
   final stageOneFormKey = GlobalKey<FormState>();
   final stageTwoFormKey = GlobalKey<FormState>();
   final stageThereFormKey = GlobalKey<FormState>();
+
+  //streets bool
+  bool oneStreet = false;
+  bool twoStreet = false;
+  bool thereStreet = false;
+  bool fourStreet = false;
+  String? selectedStreetOneValue;
+  String? selectedStreetTwoValue;
+  String? selectedStreetThereValue;
+  String? selectedStreetFourValue;
+  bool getStreetName(String numbers) {
+    switch (numbers) {
+      case 'شارع':
+        oneStreet = true;
+        twoStreet = false;
+        thereStreet = false;
+        fourStreet = false;
+        return true;
+      case "شارعين":
+        oneStreet = true;
+        twoStreet = true;
+        thereStreet = false;
+        fourStreet = false;
+        return true;
+      case "ثلاث شوارع":
+        oneStreet = true;
+        twoStreet = true;
+        thereStreet = true;
+        fourStreet = false;
+        return true;
+      case "اربع شوارع":
+        oneStreet = true;
+        twoStreet = true;
+        thereStreet = true;
+        fourStreet = true;
+        return true;
+      default:
+        return true;
+    }
+  }
 
   // for dropdown list
   List<File> selectedFiles = [];
@@ -741,7 +783,9 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          SizedBox(height: 5.h,),
+                          SizedBox(
+                            height: 5.h,
+                          ),
                           MultiSelectDropDown(
                             borderWidth: 1,
                             hint: 'التمويل',
@@ -751,8 +795,10 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                               setState(() {
                                 _selectedOptionsTamoyl.clear();
                                 _selectedOptionsTamoyl.addAll(options);
-                                _selectedItemsTamoyl = options.map((item) => item.label).toList();
-                                debugPrint(_selectedItemsTamoyl.toString()); // Print for debugging
+                                _selectedItemsTamoyl =
+                                    options.map((item) => item.label).toList();
+                                debugPrint(_selectedItemsTamoyl
+                                    .toString()); // Print for debugging
                               });
                               debugPrint(_selectedOptionsTamoyl.toString());
                             },
@@ -769,12 +815,13 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
-                            chipConfig:  ChipConfig(
-                                deleteIcon: null ,
+                            chipConfig: ChipConfig(
+                                deleteIcon: null,
                                 deleteIconColor: Colors.transparent,
                                 padding: EdgeInsets.only(right: 10.w),
-                                wrapType: WrapType.scroll, backgroundColor: AppColors.primaryBackground),
-                            optionTextStyle:  GoogleFonts.almarai(
+                                wrapType: WrapType.scroll,
+                                backgroundColor: AppColors.primaryBackground),
+                            optionTextStyle: GoogleFonts.almarai(
                               textStyle: TextStyle(
                                 color: AppColors.primaryBackground,
                                 letterSpacing: 0,
@@ -787,8 +834,14 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                               return ListTile(
                                 title: Text(valueItem.label),
                                 trailing: isSelected
-                                    ? const Icon(Icons.check_circle , color: AppColors.primaryBackground,)
-                                    : const Icon(Icons.radio_button_unchecked , color: AppColors.primaryBackground,),
+                                    ? const Icon(
+                                        Icons.check_circle,
+                                        color: AppColors.primaryBackground,
+                                      )
+                                    : const Icon(
+                                        Icons.radio_button_unchecked,
+                                        color: AppColors.primaryBackground,
+                                      ),
                               );
                             },
                           )
@@ -910,7 +963,7 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                             ValueItem(label: 'الشمال', value: '1'),
                             ValueItem(label: 'الجنوب', value: '2'),
                           ],
-                          maxItems: 2,
+                          maxItems: 4,
                           singleSelectItemStyle: GoogleFonts.almarai(
                             textStyle: TextStyle(
                               color: AppColors.primaryBackground,
@@ -1015,8 +1068,7 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                           stateValue == null ||
                           selectedCity == null ||
                           _postPriceController.text.isEmpty ||
-                          selectedAge == null ||
-                          selectedInterface.isEmpty) {
+                          selectedAge == null) {
                         setupErrorState(context);
                       } else {
                         pageController.animateToPage(index,
@@ -1076,12 +1128,12 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     PropertyTypeDropdown(
-                      selectedValue: selectedValue,
-                      textWidgetString: 'عدد الشوارع',
-                      items: streetList,
+                      selectedValue: bathRoomValue,
+                      textWidgetString: 'عدد غرف النوم',
+                      items: roomGenerateList(),
                       onChanged: (String? value) {
                         setState(() {
-                          selectedValue = value;
+                          bathRoomValue = value;
                         });
                       },
                     ),
@@ -1104,22 +1156,22 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     PropertyTypeDropdown(
-                      selectedValue: streetAreaValue,
-                      textWidgetString: 'عرض الشوارع',
-                      items: streetAreaGenerateList(),
+                      selectedValue: bedRoomValue,
+                      textWidgetString: 'عدد الحمامات',
+                      items: roomGenerateList(),
                       onChanged: (String? value) {
                         setState(() {
-                          streetAreaValue = value;
+                          bedRoomValue = value;
                         });
                       },
                     ),
                     PropertyTypeDropdown(
-                      selectedValue: bathRoomValue,
-                      textWidgetString: 'عدد غرف النوم',
-                      items: roomGenerateList(),
-                      onChanged: (String? value) {
+                      textWidgetString: 'الدور',
+                      items: const ['ارضي', 'علوي'],
+                      selectedValue: selectFloor,
+                      onChanged: (value) {
                         setState(() {
-                          bathRoomValue = value;
+                          selectFloor = value;
                         });
                       },
                     ),
@@ -1130,27 +1182,103 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   PropertyTypeDropdown(
-                    selectedValue: bedRoomValue,
-                    textWidgetString: 'عدد الحمامات',
-                    items: roomGenerateList(),
+                    selectedValue: selectedValue,
+                    textWidgetString: 'عدد الشوارع',
+                    items: streetList,
                     onChanged: (String? value) {
                       setState(() {
-                        bedRoomValue = value;
+                        selectedValue = value;
+                        getStreetName(value!);
                       });
                     },
                   ),
-                  PropertyTypeDropdown(
-                    textWidgetString: 'الدور',
-                    items: const ['ارضي', 'علوي'],
-                    selectedValue: selectFloor,
-                    onChanged: (value) {
-                      setState(() {
-                        selectFloor = value;
-                      });
-                    },
-                  ),
+                  // PropertyTypeDropdown(
+                  //   selectedValue: streetAreaValue,
+                  //   textWidgetString: 'عرض الشوارع',
+                  //   items: streetAreaGenerateList(),
+                  //   onChanged: (String? value) {
+                  //     setState(() {
+                  //       streetAreaValue = value;
+                  //     });
+                  //   },
+                  // ),
                 ],
               ),
+              if(oneStreet)
+              Padding(
+                padding: EdgeInsets.only(top: 15.h, bottom: 5.h),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(right: 5.w, left: 10.w),
+                      child: Text(
+                        'مساحة الشوارع',
+                        style: GoogleFonts.almarai(
+                          textStyle: TextStyle(
+                            color: AppColors.primaryBackground,
+                            letterSpacing: 0,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    if(oneStreet)
+                      StreetTypeDropdown(
+                        selectedValue: selectedStreetOneValue,
+                        textWidgetString: 'الاول',
+                        items: streetAreaGenerateList(),
+                        onChanged: (String? value) {
+                          setState(() {
+                            selectedStreetOneValue = value;
+                          });
+                        },
+                      ),
+                    if(twoStreet)
+                      StreetTypeDropdown(
+                        selectedValue: selectedStreetTwoValue,
+                        textWidgetString: 'الثاني',
+                        items: streetAreaGenerateList(),
+                        onChanged: (String? value) {
+                          setState(() {
+                            selectedStreetTwoValue = value;
+                          });
+                        },
+                      ),
+                    if(thereStreet)
+                      StreetTypeDropdown(
+                        selectedValue: selectedStreetThereValue,
+                        textWidgetString: 'الثالث',
+                        items: streetAreaGenerateList(),
+                        onChanged: (String? value) {
+                          setState(() {
+                            selectedStreetThereValue = value;
+                          });
+                        },
+                      ),
+                    if(fourStreet)
+                      StreetTypeDropdown(
+                        selectedValue: selectedStreetFourValue,
+                        textWidgetString: 'الرابع',
+                        items: streetAreaGenerateList(),
+                        onChanged: (String? value) {
+                          setState(() {
+                            selectedStreetFourValue = value;
+                          });
+                        },
+                      ),
+                  ],
+                ),
+
+
               ReusablePropertyField(
                 label: 'الملاحظات ',
                 hint: 'الملاحظات',
@@ -2052,7 +2180,8 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                           itemBuilder: (context, index) {
                             return Padding(
                               padding: EdgeInsets.only(left: 5.w, top: 3.h),
-                              child: InterFaceContainer(title: _selectedItemsTamoyl[index]),
+                              child: InterFaceContainer(
+                                  title: _selectedItemsTamoyl[index]),
                             );
                           }),
                     ),
