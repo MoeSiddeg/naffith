@@ -46,8 +46,7 @@ class _TicketPageState extends State<TicketPage> {
   Widget build(BuildContext context) {
     return DefaultTabController(
         length: 2,
-        child: Scaffold(
-      body: SafeArea(
+        child:  SafeArea(
         child: Column(children: [
             Container(
               padding: EdgeInsets.only(top: 5.h, bottom: 2.h),
@@ -89,112 +88,114 @@ class _TicketPageState extends State<TicketPage> {
             SizedBox(
               height: 812.h * 0.812,
               child: TabBarView(children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 45.h),
-                  child: SingleChildScrollView(
-                      child: Column(children: [
-                        Padding(
-                          padding: EdgeInsets.only(right: 0.w, bottom: 20.h , left: 0.w),
-                          child: LargeTypeDropdown(selectedValue: selectedType, textWidgetString: 'النوع', items: ['شكوة',"سؤال"], onChanged: (String? value) {
+                Scaffold(
+                  body: Padding(
+                    padding: EdgeInsets.only(top: 45.h),
+                    child: SingleChildScrollView(
+                        child: Column(children: [
+                          Padding(
+                            padding: EdgeInsets.only(right: 0.w, bottom: 20.h , left: 0.w),
+                            child: LargeTypeDropdown(selectedValue: selectedType, textWidgetString: 'النوع', items: ['شكوة',"سؤال"], onChanged: (String? value) {
 
-                            setState(() {
-                              selectedType= value;
-                              if(value== "شكوة"){
-                                tickedType = "complain";
-                              } else {
-                                tickedType = "enquiry";
-                              }
-                            });
-                          },),
-                        ),
-                        Row(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(right: 25.w, bottom: 20.h),
+                              setState(() {
+                                selectedType= value;
+                                if(value== "شكوة"){
+                                  tickedType = "complain";
+                                } else {
+                                  tickedType = "enquiry";
+                                }
+                              });
+                            },),
+                          ),
+                          Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(right: 25.w, bottom: 20.h),
+                                child: Text(
+                                  'اختر العميل الذي تم التعامل معه : ',
+                                  style: GoogleFonts.almarai(
+                                    textStyle: TextStyle(
+                                      color: AppColors.primaryBackground,
+                                      letterSpacing: 0,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          BlocBuilder<GetUsersCubit, GetUsersStates>(
+                            builder: (context, state) {
+                              return state.when(initial: () {
+                                return const CircularProgressIndicator();
+                              }, loading: () {
+                                return const CircularProgressIndicator();
+                              }, success: (usersResponseBody) {
+                                return CheckboxListWithSearch(
+                                  usersNames: context.read<GetUsersCubit>().usersNames ,    onItemSelected: (selectedItem) {
+                                  context.read<GetUsersCubit>().getUserID(name: selectedItem);
+                                },);
+                              }, error: (error) {
+                                return const Center(
+                                  child: Text('حدث خطاء ما'),
+                                );
+                              });
+                            },
+                          ),
+                          Form(
+                            key: formKey,
+                            child: Padding(
+                              padding: EdgeInsets.all(12.0.sp),
+                              child: MessageTextField(
+                                label: 'الرسالة',
+                                hint: 'الرسالة',
+                                padding: EdgeInsets.only(
+                                    right: 5.h, left: 10.h, bottom: 15.h, top: 25.h),
+                                margin: const EdgeInsets.all(0),
+                                controller: _commentsController,
+                                focusNode: _commentsFocusNode,
+                                validator: _commentsValidator,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 15.h, right: 10.w, left: 10.w),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if(formKey.currentState!.validate() && context.read<GetUsersCubit>().userId !=0 && tickedType != null){
+                                  context.read<AddTicketCubit>().emitAddTicketStates(msg: _commentsController.text, agentId: context.read<GetUsersCubit>().userId, type: tickedType!);
+                                }else{
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content:  Text('الرجاء التأكد من جميع البيانات'),
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.primaryBackground,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.w),
+                                ),
+                                minimumSize: Size(120.w, 40.h),
+                              ),
                               child: Text(
-                                'اختر العميل الذي تم التعامل معه : ',
+                                'إرسال',
                                 style: GoogleFonts.almarai(
                                   textStyle: TextStyle(
-                                    color: AppColors.primaryBackground,
+                                    color: Colors.white,
                                     letterSpacing: 0,
-                                    fontSize: 15.sp,
+                                    fontSize: 12.sp,
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                        BlocBuilder<GetUsersCubit, GetUsersStates>(
-                          builder: (context, state) {
-                            return state.when(initial: () {
-                              return const CircularProgressIndicator();
-                            }, loading: () {
-                              return const CircularProgressIndicator();
-                            }, success: (usersResponseBody) {
-                              return CheckboxListWithSearch(
-                                usersNames: context.read<GetUsersCubit>().usersNames ,    onItemSelected: (selectedItem) {
-                                context.read<GetUsersCubit>().getUserID(name: selectedItem);
-                              },);
-                            }, error: (error) {
-                              return const Center(
-                                child: Text('حدث خطاء ما'),
-                              );
-                            });
-                          },
-                        ),
-                        Form(
-                          key: formKey,
-                          child: Padding(
-                            padding: EdgeInsets.all(12.0.sp),
-                            child: MessageTextField(
-                              label: 'الرسالة',
-                              hint: 'الرسالة',
-                              padding: EdgeInsets.only(
-                                  right: 5.h, left: 10.h, bottom: 15.h, top: 25.h),
-                              margin: const EdgeInsets.all(0),
-                              controller: _commentsController,
-                              focusNode: _commentsFocusNode,
-                              validator: _commentsValidator,
-                            ),
                           ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 15.h, right: 10.w, left: 10.w),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              if(formKey.currentState!.validate() && context.read<GetUsersCubit>().userId !=0 && tickedType != null){
-                                context.read<AddTicketCubit>().emitAddTicketStates(msg: _commentsController.text, agentId: context.read<GetUsersCubit>().userId, type: tickedType!);
-                              }else{
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content:  Text('الرجاء التأكد من جميع البيانات'),
-                                    backgroundColor: Colors.red,
-                                  ),
-                                );
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primaryBackground,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30.w),
-                              ),
-                              minimumSize: Size(120.w, 40.h),
-                            ),
-                            child: Text(
-                              'إرسال',
-                              style: GoogleFonts.almarai(
-                                textStyle: TextStyle(
-                                  color: Colors.white,
-                                  letterSpacing: 0,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ])),
+                        ])),
+                  ),
                 ),
           Padding(
               padding: EdgeInsets.only(top: 45.h),
@@ -276,7 +277,7 @@ class _TicketPageState extends State<TicketPage> {
           ]),
         ),
      ] ),
-        ))
+        )
 
     );
   }

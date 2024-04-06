@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:naffith/common/values/colors.dart';
 
 import '../theming/colors.dart';
 import '../theming/styles.dart';
@@ -69,7 +71,14 @@ class AppTextFormField extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(16.0),
         ),
-        hintStyle: hintStyle ?? TextStyles.font14LightGrayRegular,
+        hintStyle:  GoogleFonts.almarai(
+          textStyle: TextStyle(
+            color: AppColors.primarySecondaryBackground,
+            letterSpacing: 0,
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
         hintText: hintText,
         suffixIcon: suffixIcon,
         fillColor: backgroundColor ?? ColorsManager.moreLightGray,
