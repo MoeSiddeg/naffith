@@ -20,6 +20,7 @@ import '../../presentation/screens/order_steps/data/models/create_order_response
 import '../../presentation/screens/privacy_policy_page/data/models/privacy_policy_response.dart';
 import '../../presentation/screens/profile/data/models/upload_faal_response.dart';
 import '../../presentation/screens/ticket_page/data/models/add_ticket_response_body.dart';
+import '../../presentation/screens/ticket_page/data/models/all_tickets_response_body.dart';
 import '../category/data/models/category_response_body.dart';
 import '../state_list/data/models/state_response.dart';
 import '../users_data/Data/models/users_response_body.dart';
@@ -406,4 +407,12 @@ abstract class ApiService {
     @Query('area_direction') String? area_direction,
     @Query('market_price') int? market_price,
   });
+  /////////////////////////////////////////////////////////
+// all tickets
+ @GET('tickets')
+ @Headers(<String, dynamic>{
+   'Accept': 'application/json',
+   "Content-Type": "application/json",
+ })
+  Future<AllTicketsResponseBody> getAllTickets( @Header('Authorization') String Bearer);
 }

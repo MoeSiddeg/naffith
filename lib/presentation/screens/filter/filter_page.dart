@@ -37,8 +37,8 @@ class _FilterPageState extends State<FilterPage> {
     return allRealEstates.where((realEstate) {
       // Filter by search query (assuming the search query should match the sub_type or any other relevant field)
       return realEstate.subType!
-          .toLowerCase()
-          .contains(searchQuery.toLowerCase()) ||
+              .toLowerCase()
+              .contains(searchQuery.toLowerCase()) ||
           realEstate.state!.name!
               .toLowerCase()
               .contains(searchQuery.toLowerCase());
@@ -129,7 +129,11 @@ class _FilterPageState extends State<FilterPage> {
                 children: [
                   IconButton(
                       onPressed: () {
-                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ApplicationPage()), (route) => false);
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ApplicationPage()),
+                            (route) => false);
                       },
                       icon: Icon(
                         Icons.keyboard_arrow_right_sharp,
@@ -142,11 +146,11 @@ class _FilterPageState extends State<FilterPage> {
                       'تصفية العقارات',
                       style: GoogleFonts.almarai(
                           textStyle: TextStyle(
-                            color: AppColors.primaryBackground,
-                            letterSpacing: 0,
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.w700,
-                          )),
+                        color: AppColors.primaryBackground,
+                        letterSpacing: 0,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w700,
+                      )),
                     ),
                   ),
                 ],
@@ -177,10 +181,10 @@ class _FilterPageState extends State<FilterPage> {
                           builder: (context) => StatefulBuilder(
                               builder: (context, setStateSB) => Container(
                                   height:
-                                  MediaQuery.of(context).size.height * 0.95,
+                                      MediaQuery.of(context).size.height * 0.95,
                                   decoration: const BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius:  BorderRadius.only(
+                                    borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(25.0),
                                       topRight: Radius.circular(25.0),
                                     ),
@@ -199,8 +203,8 @@ class _FilterPageState extends State<FilterPage> {
                                               'تصنيف العقار',
                                               style: GoogleFonts.almarai(
                                                 textStyle: TextStyle(
-                                                  color:
-                                                  AppColors.primaryBackground,
+                                                  color: AppColors
+                                                      .primaryBackground,
                                                   letterSpacing: 0,
                                                   fontSize: 18.sp,
                                                   fontWeight: FontWeight.w700,
@@ -233,7 +237,8 @@ class _FilterPageState extends State<FilterPage> {
                                                 'عرض',
                                                 style: GoogleFonts.almarai(
                                                   textStyle: TextStyle(
-                                                    color: AppColors.primaryBackground,
+                                                    color: AppColors
+                                                        .primaryBackground,
                                                     letterSpacing: 0,
                                                     fontSize: 13.sp,
                                                     fontWeight: FontWeight.w700,
@@ -241,9 +246,11 @@ class _FilterPageState extends State<FilterPage> {
                                                 ),
                                                 overflow: TextOverflow.ellipsis,
                                               ),
-                                              activeColor: AppColors.primaryBackground,
-                                              fillColor: MaterialStateProperty.all<Color>(
-                                                  AppColors.primaryBackground),
+                                              activeColor:
+                                                  AppColors.primaryBackground,
+                                              fillColor: MaterialStateProperty
+                                                  .all<Color>(AppColors
+                                                      .primaryBackground),
                                               value: RealGoal.sell,
                                               groupValue: _realGoal,
                                               onChanged: (val) {
@@ -260,7 +267,8 @@ class _FilterPageState extends State<FilterPage> {
                                                 'طلب',
                                                 style: GoogleFonts.almarai(
                                                   textStyle: TextStyle(
-                                                    color: AppColors.primaryBackground,
+                                                    color: AppColors
+                                                        .primaryBackground,
                                                     letterSpacing: 0,
                                                     fontSize: 13.sp,
                                                     fontWeight: FontWeight.w700,
@@ -268,9 +276,11 @@ class _FilterPageState extends State<FilterPage> {
                                                 ),
                                                 overflow: TextOverflow.ellipsis,
                                               ),
-                                              activeColor: AppColors.primaryBackground,
-                                              fillColor: MaterialStateProperty.all<Color>(
-                                                  AppColors.primaryBackground),
+                                              activeColor:
+                                                  AppColors.primaryBackground,
+                                              fillColor: MaterialStateProperty
+                                                  .all<Color>(AppColors
+                                                      .primaryBackground),
                                               value: RealGoal.buy,
                                               groupValue: _realGoal,
                                               onChanged: (val) {
@@ -284,7 +294,8 @@ class _FilterPageState extends State<FilterPage> {
                                       ],
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         Container(
                                           padding: EdgeInsets.only(right: 20.h),
@@ -295,7 +306,7 @@ class _FilterPageState extends State<FilterPage> {
                                             style: GoogleFonts.almarai(
                                               textStyle: TextStyle(
                                                 color:
-                                                AppColors.primaryBackground,
+                                                    AppColors.primaryBackground,
                                                 letterSpacing: 0,
                                                 fontSize: 18.sp,
                                                 fontWeight: FontWeight.w700,
@@ -306,23 +317,35 @@ class _FilterPageState extends State<FilterPage> {
                                       ],
                                     ),
                                     Container(
-                                      child:  Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           PropertyTypeDropdownWithOutTitle(
                                               selectedValue: stateValue,
                                               textWidgetString: 'المدينة',
-                                              items: context.read<StateCubit>().stateNames,
+                                              items: context
+                                                  .read<StateCubit>()
+                                                  .stateNames,
                                               onChanged: (String? value) async {
                                                 setStateSB(() {
                                                   stateValue = value;
                                                   selectedCity = null;
-                                                  context.read<StateCubit>().getStateID(name: value);
-                                                  context.read<CitiesCubit>().emitCitiesListStates(
-                                                      context.read<StateCubit>().id.toString());
+                                                  context
+                                                      .read<StateCubit>()
+                                                      .getStateID(name: value);
+                                                  context
+                                                      .read<CitiesCubit>()
+                                                      .emitCitiesListStates(
+                                                          context
+                                                              .read<
+                                                                  StateCubit>()
+                                                              .id
+                                                              .toString());
                                                 });
                                               }),
-                                          BlocBuilder<CitiesCubit, CitiesStates>(
+                                          BlocBuilder<CitiesCubit,
+                                              CitiesStates>(
                                             builder: (context, state) {
                                               return state.when(initial: () {
                                                 return PropertyTypeDropdownWithOutTitle(
@@ -334,15 +357,19 @@ class _FilterPageState extends State<FilterPage> {
                                                         selectedCity = value;
                                                         context
                                                             .read<CitiesCubit>()
-                                                            .getCityID(name: value);
+                                                            .getCityID(
+                                                                name: value);
                                                       });
                                                     });
                                               }, loading: () {
-                                                return  Center(
+                                                return Center(
                                                   child: Padding(
-                                                    padding:  EdgeInsets.only(left : 30.w),
-                                                    child: const CircularProgressIndicator(
-                                                      color: AppColors.primaryBackground,
+                                                    padding: EdgeInsets.only(
+                                                        left: 30.w),
+                                                    child:
+                                                        const CircularProgressIndicator(
+                                                      color: AppColors
+                                                          .primaryBackground,
                                                     ),
                                                   ),
                                                 );
@@ -350,19 +377,24 @@ class _FilterPageState extends State<FilterPage> {
                                                 return PropertyTypeDropdownWithOutTitle(
                                                     selectedValue: selectedCity,
                                                     textWidgetString: 'الحي',
-                                                    items: context.read<CitiesCubit>().stateNames,
+                                                    items: context
+                                                        .read<CitiesCubit>()
+                                                        .stateNames,
                                                     onChanged: (String? value) {
                                                       setStateSB(() {
                                                         selectedCity = value;
                                                         context
                                                             .read<CitiesCubit>()
-                                                            .getCityID(name: value);
+                                                            .getCityID(
+                                                                name: value);
                                                       });
                                                     });
                                               }, error: (error) {
                                                 return const Center(
-                                                  child: CircularProgressIndicator(
-                                                    color: AppColors.primaryBackground,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    color: AppColors
+                                                        .primaryBackground,
                                                   ),
                                                 );
                                               });
@@ -376,12 +408,18 @@ class _FilterPageState extends State<FilterPage> {
                                     ),
                                     Container(
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Padding(
-                                            padding:  EdgeInsets.only(right: 5.w),
-                                            child: InterfaceListAlertDialogWithoutTilte(
-                                              stringList: ['بنك', "كاش",],
+                                            padding:
+                                                EdgeInsets.only(right: 5.w),
+                                            child:
+                                                InterfaceListAlertDialogWithoutTilte(
+                                              stringList: [
+                                                'بنك',
+                                                "كاش",
+                                              ],
                                               title: 'التمويل',
                                               selectedItems: tamoyl,
                                             ),
@@ -389,20 +427,24 @@ class _FilterPageState extends State<FilterPage> {
                                           PropertyTypeDropdownWithOutTitle(
                                               selectedValue: categoryValue,
                                               textWidgetString: 'نوع العقار',
-                                              items: context.read<CategoryCubit>().names,
+                                              items: context
+                                                  .read<CategoryCubit>()
+                                                  .names,
                                               onChanged: (String? value) {
                                                 setStateSB(() {
                                                   categoryValue = value;
                                                   context
                                                       .read<CategoryCubit>()
-                                                      .getCategoryID(name: value);
+                                                      .getCategoryID(
+                                                          name: value);
                                                 });
                                               }),
                                         ],
                                       ),
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         Container(
                                           padding: EdgeInsets.only(right: 20.h),
@@ -413,7 +455,7 @@ class _FilterPageState extends State<FilterPage> {
                                             style: GoogleFonts.almarai(
                                               textStyle: TextStyle(
                                                 color:
-                                                AppColors.primaryBackground,
+                                                    AppColors.primaryBackground,
                                                 letterSpacing: 0,
                                                 fontSize: 18.sp,
                                                 fontWeight: FontWeight.w700,
@@ -427,14 +469,16 @@ class _FilterPageState extends State<FilterPage> {
                                       height: 5.h,
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         ReusableFormFieldWithOutTitle(
                                           labelText: 'السعر',
                                           hintText: 'من',
                                           controller: _postPriceStartController,
                                           focusNode: _postPriceFocusNode,
-                                          validator: (value) => _postPriceValidator(value),
+                                          validator: (value) =>
+                                              _postPriceValidator(value),
                                           keyboardType: TextInputType.number,
                                         ),
                                         ReusableFormFieldWithOutTitle(
@@ -442,13 +486,15 @@ class _FilterPageState extends State<FilterPage> {
                                           hintText: 'الى',
                                           controller: _postPriceEndController,
                                           focusNode: _postPriceEndFocusNode,
-                                          validator: (value) => _postPriceEndValidator(value),
+                                          validator: (value) =>
+                                              _postPriceEndValidator(value),
                                           keyboardType: TextInputType.number,
                                         ),
                                       ],
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         Container(
                                           padding: EdgeInsets.only(right: 20.h),
@@ -459,7 +505,7 @@ class _FilterPageState extends State<FilterPage> {
                                             style: GoogleFonts.almarai(
                                               textStyle: TextStyle(
                                                 color:
-                                                AppColors.primaryBackground,
+                                                    AppColors.primaryBackground,
                                                 letterSpacing: 0,
                                                 fontSize: 18.sp,
                                                 fontWeight: FontWeight.w700,
@@ -473,14 +519,16 @@ class _FilterPageState extends State<FilterPage> {
                                       height: 5.h,
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         ReusableFormFieldWithOutTitle(
                                           labelText: 'المساحة',
                                           hintText: 'من',
                                           controller: _areaStartController,
                                           focusNode: _areaFocusNode,
-                                          validator: (value) => _postPriceValidator(value),
+                                          validator: (value) =>
+                                              _postPriceValidator(value),
                                           keyboardType: TextInputType.number,
                                         ),
                                         ReusableFormFieldWithOutTitle(
@@ -488,42 +536,42 @@ class _FilterPageState extends State<FilterPage> {
                                           hintText: 'الى',
                                           controller: _areaEndController,
                                           focusNode: _areaEndFocusNode,
-                                          validator: (value) => _postPriceEndValidator(value),
+                                          validator: (value) =>
+                                              _postPriceEndValidator(value),
                                           keyboardType: TextInputType.number,
                                         ),
                                       ],
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         Container(
                                           height: 260.h,
                                           width: 300.w,
                                           child: Padding(
-                                            padding: EdgeInsets.symmetric(vertical: 0),
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 0),
                                             child: Column(
                                               children: [
                                                 Row(
                                                   mainAxisAlignment:
-                                                  MainAxisAlignment.start,
+                                                      MainAxisAlignment.start,
                                                   children: [
                                                     Padding(
-                                                      padding:
-                                                      EdgeInsets.only(
+                                                      padding: EdgeInsets.only(
                                                           right: 15.h),
                                                       child: Text(
                                                         'تصنيف',
-                                                        style: GoogleFonts
-                                                            .almarai(
-                                                          textStyle:
-                                                          TextStyle(
+                                                        style:
+                                                            GoogleFonts.almarai(
+                                                          textStyle: TextStyle(
                                                             color: AppColors
                                                                 .primaryBackground,
                                                             letterSpacing: 0,
                                                             fontSize: 16.sp,
                                                             fontWeight:
-                                                            FontWeight
-                                                                .w700,
+                                                                FontWeight.w700,
                                                           ),
                                                         ),
                                                       ),
@@ -593,54 +641,72 @@ class _FilterPageState extends State<FilterPage> {
                                                 //   ],
                                                 // ),
                                                 Flexible(
-                                                  child: RadioListTile<ElectricMeter>(
+                                                  child: RadioListTile<
+                                                          ElectricMeter>(
                                                       title: Text(
                                                         'السعر من أقل الى أكثر',
-                                                        style: GoogleFonts.almarai(
+                                                        style:
+                                                            GoogleFonts.almarai(
                                                           textStyle: TextStyle(
-                                                            color: AppColors.primaryBackground,
+                                                            color: AppColors
+                                                                .primaryBackground,
                                                             letterSpacing: 0,
                                                             fontSize: 13.sp,
-                                                            fontWeight: FontWeight.w700,
+                                                            fontWeight:
+                                                                FontWeight.w700,
                                                           ),
                                                         ),
-                                                        overflow: TextOverflow.ellipsis,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                       ),
-                                                      activeColor: AppColors.primaryBackground,
-                                                      fillColor: MaterialStateProperty.all<Color>(
-                                                          AppColors.primaryBackground),
+                                                      activeColor: AppColors
+                                                          .primaryBackground,
+                                                      fillColor: MaterialStateProperty
+                                                          .all<Color>(AppColors
+                                                              .primaryBackground),
                                                       value: ElectricMeter.no,
-                                                      groupValue: _electricMeter,
+                                                      groupValue:
+                                                          _electricMeter,
                                                       onChanged: (val) {
                                                         setStateSB(() {
                                                           _electricMeter = val;
-                                                          _electricMeterValue = 'ASC';
+                                                          _electricMeterValue =
+                                                              'ASC';
                                                         });
                                                       }),
                                                 ),
                                                 Flexible(
-                                                  child: RadioListTile<ElectricMeter>(
+                                                  child: RadioListTile<
+                                                          ElectricMeter>(
                                                       title: Text(
                                                         'السعر من أكثر الى أقل',
-                                                        style: GoogleFonts.almarai(
+                                                        style:
+                                                            GoogleFonts.almarai(
                                                           textStyle: TextStyle(
-                                                            color: AppColors.primaryBackground,
+                                                            color: AppColors
+                                                                .primaryBackground,
                                                             letterSpacing: 0,
                                                             fontSize: 13.sp,
-                                                            fontWeight: FontWeight.w700,
+                                                            fontWeight:
+                                                                FontWeight.w700,
                                                           ),
                                                         ),
-                                                        overflow: TextOverflow.ellipsis,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                       ),
-                                                      activeColor: AppColors.primaryBackground,
-                                                      fillColor: MaterialStateProperty.all<Color>(
-                                                          AppColors.primaryBackground),
+                                                      activeColor: AppColors
+                                                          .primaryBackground,
+                                                      fillColor: MaterialStateProperty
+                                                          .all<Color>(AppColors
+                                                              .primaryBackground),
                                                       value: ElectricMeter.yes,
-                                                      groupValue: _electricMeter,
+                                                      groupValue:
+                                                          _electricMeter,
                                                       onChanged: (val) {
                                                         setStateSB(() {
                                                           _electricMeter = val;
-                                                          _electricMeterValue = 'DESC';
+                                                          _electricMeterValue =
+                                                              'DESC';
                                                         });
                                                       }),
                                                 ),
@@ -707,85 +773,104 @@ class _FilterPageState extends State<FilterPage> {
                                                 //   ],
                                                 // ),
                                                 Flexible(
-                                                  child: RadioListTile<WaterMeter>(
+                                                  child: RadioListTile<
+                                                          WaterMeter>(
                                                       title: Text(
                                                         'المساحة من أقل الى أكثر',
-                                                        style: GoogleFonts.almarai(
-                                                          textStyle: TextStyle(
-                                                            color: AppColors.primaryBackground,
-                                                            letterSpacing: 0,
-                                                            fontSize: 13.sp,
-                                                            fontWeight: FontWeight.w700,
-                                                          ),
-                                                        ),
-                                                        overflow: TextOverflow.ellipsis,
-                                                      ),
-                                                      activeColor: AppColors.primaryBackground,
-                                                      fillColor: MaterialStateProperty.all<Color>(
-                                                          AppColors.primaryBackground),
-                                                      value: WaterMeter.no,
-                                                      groupValue: _waterMeter,
-                                                      onChanged: (val) {
-                                                        setStateSB(() {
-                                                          _waterMeter = val;
-                                                          _waterMeterValue = 'ASC';
-                                                        });
-                                                      }),
-                                                ),
-                                                Flexible(
-                                                  child: RadioListTile<WaterMeter>(
-                                                      title: Text(
-                                                        'المساحة من أكثر الى أقل',
-                                                        style: GoogleFonts.almarai(
-                                                          textStyle: TextStyle(
-                                                            color: AppColors.primaryBackground,
-                                                            letterSpacing: 0,
-                                                            fontSize: 13.sp,
-                                                            fontWeight: FontWeight.w700,
-                                                          ),
-                                                        ),
-                                                        overflow: TextOverflow.ellipsis,
-                                                      ),
-                                                      activeColor: AppColors.primaryBackground,
-                                                      fillColor: MaterialStateProperty.all<Color>(
-                                                          AppColors.primaryBackground),
-                                                      value: WaterMeter.yes,
-                                                      groupValue: _waterMeter,
-                                                      onChanged: (val) {
-                                                        setStateSB(() {
-                                                          _waterMeter = val;
-                                                          _waterMeterValue = 'DESC';
-                                                        });
-                                                      }),
-                                                ),
-                                                Padding(
-                                                  padding:  EdgeInsets.only( right: 11.w),
-                                                  child: Row(
-                                                    children: [
-                                                      Checkbox(
-                                                        //fillColor:MaterialStateProperty.all<Color>(Color.fromRGBO(23, 56, 61, 1)),
-                                                        activeColor:
-                                                        Color.fromRGBO(
-                                                            23, 56, 61, 1),
-                                                        value: isMarketPriceChecked,
-                                                        onChanged:
-                                                            (bool? value) {
-                                                          setStateSB(() {
-                                                            isMarketPriceChecked = value;
-                                                          });
-                                                        },
-                                                      ),
-                                                      Text(
-                                                        'سعر السوق',
                                                         style:
-                                                        GoogleFonts.almarai(
+                                                            GoogleFonts.almarai(
                                                           textStyle: TextStyle(
                                                             color: AppColors
                                                                 .primaryBackground,
                                                             letterSpacing: 0,
                                                             fontSize: 13.sp,
                                                             fontWeight:
-                                                            FontWeight.w700,
+                                                                FontWeight.w700,
+                                                          ),
+                                                        ),
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                      activeColor: AppColors
+                                                          .primaryBackground,
+                                                      fillColor: MaterialStateProperty
+                                                          .all<Color>(AppColors
+                                                              .primaryBackground),
+                                                      value: WaterMeter.no,
+                                                      groupValue: _waterMeter,
+                                                      onChanged: (val) {
+                                                        setStateSB(() {
+                                                          _waterMeter = val;
+                                                          _waterMeterValue =
+                                                              'ASC';
+                                                        });
+                                                      }),
+                                                ),
+                                                Flexible(
+                                                  child: RadioListTile<
+                                                          WaterMeter>(
+                                                      title: Text(
+                                                        'المساحة من أكثر الى أقل',
+                                                        style:
+                                                            GoogleFonts.almarai(
+                                                          textStyle: TextStyle(
+                                                            color: AppColors
+                                                                .primaryBackground,
+                                                            letterSpacing: 0,
+                                                            fontSize: 13.sp,
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                          ),
+                                                        ),
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                      activeColor: AppColors
+                                                          .primaryBackground,
+                                                      fillColor: MaterialStateProperty
+                                                          .all<Color>(AppColors
+                                                              .primaryBackground),
+                                                      value: WaterMeter.yes,
+                                                      groupValue: _waterMeter,
+                                                      onChanged: (val) {
+                                                        setStateSB(() {
+                                                          _waterMeter = val;
+                                                          _waterMeterValue =
+                                                              'DESC';
+                                                        });
+                                                      }),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      right: 11.w),
+                                                  child: Row(
+                                                    children: [
+                                                      Checkbox(
+                                                        //fillColor:MaterialStateProperty.all<Color>(Color.fromRGBO(23, 56, 61, 1)),
+                                                        activeColor:
+                                                            Color.fromRGBO(
+                                                                23, 56, 61, 1),
+                                                        value:
+                                                            isMarketPriceChecked,
+                                                        onChanged:
+                                                            (bool? value) {
+                                                          setStateSB(() {
+                                                            isMarketPriceChecked =
+                                                                value;
+                                                          });
+                                                        },
+                                                      ),
+                                                      Text(
+                                                        'سعر السوق',
+                                                        style:
+                                                            GoogleFonts.almarai(
+                                                          textStyle: TextStyle(
+                                                            color: AppColors
+                                                                .primaryBackground,
+                                                            letterSpacing: 0,
+                                                            fontSize: 13.sp,
+                                                            fontWeight:
+                                                                FontWeight.w700,
                                                           ),
                                                         ),
                                                       ),
@@ -801,25 +886,41 @@ class _FilterPageState extends State<FilterPage> {
                                     GestureDetector(
                                       onTap: () {
                                         Navigator.pop(context);
-                                        context.read<EstateFilterCubit>().emitAllEstatesFilterStates(
-                                          // goal: '',
-                                          priceFrom: int.tryParse(_postPriceStartController.text),
-                                          priceTo: int.tryParse(_postPriceEndController.text),
-                                          stateId: context
-                                              .read<StateCubit>().id != 0 ? context
-                                              .read<StateCubit>().id : null,
-                                          cityId: context
-                                              .read<CitiesCubit>().id != 0 ? context
-                                              .read<CitiesCubit>().id: null,
-                                          areaFrom: int.tryParse(_areaStartController.text),
-                                          areaTo: int.tryParse(_areaEndController.text),
-                                          price_direction: _electricMeterValue,
-                                          area_direction: _waterMeterValue,
-                                          market_price: isMarketPriceChecked == true ? 1 : 0
-                                        );
+                                        context
+                                            .read<EstateFilterCubit>()
+                                            .emitAllEstatesFilterStates(
+                                                // goal: '',
+                                                priceFrom: int.tryParse(
+                                                    _postPriceStartController
+                                                        .text),
+                                                priceTo: int.tryParse(
+                                                    _postPriceEndController
+                                                        .text),
+                                                stateId: context.read<StateCubit>().id != 0
+                                                    ? context
+                                                        .read<StateCubit>()
+                                                        .id
+                                                    : null,
+                                                cityId: context.read<CitiesCubit>().id != 0
+                                                    ? context
+                                                        .read<CitiesCubit>()
+                                                        .id
+                                                    : null,
+                                                areaFrom: int.tryParse(
+                                                    _areaStartController.text),
+                                                areaTo: int.tryParse(
+                                                    _areaEndController.text),
+                                                price_direction:
+                                                    _electricMeterValue,
+                                                area_direction:
+                                                    _waterMeterValue,
+                                                market_price:
+                                                    isMarketPriceChecked == true
+                                                        ? 1
+                                                        : 0);
                                         context.read<StateCubit>().id = 0;
                                         context.read<CitiesCubit>().id = 0;
-                                        selectedCity= null;
+                                        selectedCity = null;
                                         stateValue = null;
                                       },
                                       child: Container(
@@ -828,7 +929,8 @@ class _FilterPageState extends State<FilterPage> {
                                         width: 200.w,
                                         height: 40.h,
                                         decoration: BoxDecoration(
-                                            color: const Color.fromRGBO(23, 56, 61, 1),
+                                            color: const Color.fromRGBO(
+                                                23, 56, 61, 1),
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(30.w)),
                                             boxShadow: [
@@ -897,28 +999,27 @@ class _FilterPageState extends State<FilterPage> {
                           }),
                     ),
                   );
-                }, success: (FilterRealEstateResponse allRealEstatesResponseBody) {
-                  if(allRealEstatesResponseBody.data!.isEmpty){
+                }, success:
+                    (FilterRealEstateResponse allRealEstatesResponseBody) {
+                  if (allRealEstatesResponseBody.data!.isEmpty) {
                     return Padding(
-                      padding:  EdgeInsets.only(top: 200.h),
+                      padding: EdgeInsets.only(top: 200.h),
                       child: Center(
                         child: Text(
                           'لا توجد عقارات',
                           style: GoogleFonts.almarai(
                               textStyle: TextStyle(
-                                color: AppColors.primaryBackground,
-                                letterSpacing: 0,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.w700,
-                              )),
+                            color: AppColors.primaryBackground,
+                            letterSpacing: 0,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w700,
+                          )),
                         ),
                       ),
                     );
                   } else {
-                    List<Data> filteredList =
-                    filterRealEstatesBySearchQuery(
-                      allRealEstates:
-                      allRealEstatesResponseBody.data!,
+                    List<Data> filteredList = filterRealEstatesBySearchQuery(
+                      allRealEstates: allRealEstatesResponseBody.data!,
                       searchQuery: _textSearchController.text,
                     );
 
@@ -929,7 +1030,7 @@ class _FilterPageState extends State<FilterPage> {
                         itemCount: filteredList.length,
                         //   separatorBuilder: (BuildContext context, int index) => const Divider(),
                         itemBuilder: (context, index) {
-                          return  FilterCard(
+                          return FilterCard(
                             allRealEstatesResponseBody: filteredList,
                             index: index,
                           );
@@ -948,23 +1049,21 @@ class _FilterPageState extends State<FilterPage> {
                           'حدث خطأ ما ',
                           style: GoogleFonts.almarai(
                               textStyle: TextStyle(
-                                color: AppColors.primaryBackground,
-                                letterSpacing: 0,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.w700,
-                              )),
+                            color: AppColors.primaryBackground,
+                            letterSpacing: 0,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w700,
+                          )),
                         ),
                         GestureDetector(
-                          onTap: () {
-
-                          },
+                          onTap: () {},
                           child: Container(
                             width: 239.w,
                             height: 42.h,
                             decoration: BoxDecoration(
                                 color: const Color.fromRGBO(23, 56, 61, 1),
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(30.w)),
+                                    BorderRadius.all(Radius.circular(30.w)),
                                 boxShadow: [
                                   BoxShadow(
                                       color: Colors.grey.withOpacity(0.1),

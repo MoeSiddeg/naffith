@@ -34,6 +34,7 @@ import 'package:naffith/presentation/screens/profile/logic/get_faal_cubit.dart';
 import 'package:naffith/presentation/screens/profile/logic/update_faal_cubit.dart';
 import 'package:naffith/presentation/screens/social_media_page/Cubit/social_media_cubit.dart';
 import 'package:naffith/presentation/screens/ticket_page/logic/add_ticket_cubit.dart';
+import 'package:naffith/presentation/screens/ticket_page/logic/all_tickets/all_tickets_cubit.dart';
 import '../../global.dart';
 import '../../presentation/screens/add_advertisements/BloC/add_post_bloc.dart';
 import '../../presentation/screens/add_advertisements/add_advertisement_page.dart';
@@ -276,6 +277,12 @@ class AppPages {
           page: const AddAdvertisementPage(),
           bloc: BlocProvider(
             create: (_) => getIt<EstateFilterCubit>(),
+          )),
+      PageEntity(
+          route: AppRoutes.ADD_APPLICATION,
+          page: const AddAdvertisementPage(),
+          bloc: BlocProvider(
+            create: (_) => getIt<AllTicketsCubit>(),
           )),
     ];
   }

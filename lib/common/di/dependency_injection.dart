@@ -61,6 +61,7 @@ import 'package:naffith/presentation/screens/social_media_page/Cubit/social_medi
 import 'package:naffith/presentation/screens/social_media_page/data/repo/social_media_repo.dart';
 import 'package:naffith/presentation/screens/ticket_page/data/repo/add_ticket_repo.dart';
 import 'package:naffith/presentation/screens/ticket_page/logic/add_ticket_cubit.dart';
+import 'package:naffith/presentation/screens/ticket_page/logic/all_tickets/all_tickets_cubit.dart';
 import 'package:naffith/presentation/screens/user_terms_page/Cubit/user_terms_cubit.dart';
 import 'package:naffith/presentation/screens/user_terms_page/data/repo/user_terms_repo.dart';
 import '../../presentation/screens/home_page/logic/all_real_estate/all_real_estates_list_cubit.dart';
@@ -183,4 +184,6 @@ Future<void> setupGetIt() async {
   // filter real estates
   getIt.registerLazySingleton<EstateFilterCubit>(() => EstateFilterCubit(getIt()));
   getIt.registerLazySingleton<EstateFilterRepo>(() => EstateFilterRepo(getIt()));
+  // all tickets
+  getIt.registerLazySingleton<AllTicketsCubit>(() => AllTicketsCubit(getIt()));
 }

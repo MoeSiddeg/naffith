@@ -11,10 +11,12 @@ import 'common/routes/routes.dart';
 import 'common/values/constants_design.dart';
 import 'firebase_options.dart';
 import 'global.dart';
+import 'noti_controller.dart';
 
 Future<void> main() async {
   setupGetIt();
   await ScreenUtil.ensureScreenSize();
+
   await Future.delayed(const Duration(seconds:3));
   await Global.init();
   runApp(const MyApp());
@@ -25,6 +27,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  final notificationsController = NotificationsController();
+  await notificationsController.initialize();
 }
 
 class MyApp extends StatelessWidget {

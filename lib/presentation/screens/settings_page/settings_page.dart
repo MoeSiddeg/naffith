@@ -14,6 +14,7 @@ import '../../../common/values/colors.dart';
 import '../../../common/values/constant.dart';
 import '../../../common/widgets/login_alert.dart';
 import '../../../global.dart';
+import '../../../noti_controller.dart';
 import '../about_us_page/Cubit/about_us_cubit.dart';
 import '../about_us_page/about_us_page.dart';
 import '../comman_questions_page/comman_questions_page.dart';
@@ -29,6 +30,8 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLoggedin = Global.storageService.getIsLoggedIn();
+    final newNotificationCount = NotificationsController().unreadNotifications.length ;
     return Column(
         children: [
       Column(
@@ -59,16 +62,56 @@ class SettingsPage extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap:(){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationsPage()));
+                        // Assuming you have a NotificationsController instance
+                        final notificationsController = NotificationsController();
+                        final notificationHistory = notificationsController.notificationHistory;
+
+// Navigate to the NotificationsPage
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => NotificationsPage(
+                              notificationHistory: notificationHistory,
+                            ),
+                          ),
+                        );
                       },
-                      child: Container(
-                        height: 35.h,
-                        width: 35.w,
-                        decoration:const BoxDecoration (
-                          shape: BoxShape.circle,
-                          color: AppColors.primaryFourthElementText,
-                        ),
-                        child: Icon(Icons.notifications_none, size: 27.sp, color: AppColors.primaryBackground,),
+                      child: Stack(
+                        children: [
+                          Container(
+                            height: 35.h,
+                            width: 35.w,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors.primaryFourthElementText,
+                            ),
+                            child: Icon(
+                              Icons.notifications_none,
+                              size: 27.sp,
+                              color: AppColors.primaryBackground,
+                            ),
+                          ),
+                          if (newNotificationCount > 0)
+                            Positioned(
+                              top: 0,
+                              right: 0,
+                              child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColors.primarySecondaryElementText,
+                                ),
+                                child: Text(
+                                  '$newNotificationCount',
+                                  style: TextStyle(
+                                    color: AppColors.primaryBackground,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
                     )
                   ],
@@ -613,7 +656,7 @@ class SettingsPage extends StatelessWidget {
                     width: 239.w,
                     height: 45.h,
                     decoration: BoxDecoration(
-                        color: const Color.fromRGBO(240, 60, 59, 1),
+                        color: isLoggedin ?  const Color.fromRGBO(240, 60, 59, 1) :AppColors.primaryBackground,
                         borderRadius: BorderRadius.all(
                             Radius.circular(30.w)),
                         boxShadow: [
@@ -626,7 +669,7 @@ class SettingsPage extends StatelessWidget {
                         ]),
                     child: Center(
                       child: Text(
-                        'تسجيل خروج',
+                        isLoggedin ? 'تسجيل خروج':'تسجيل دخول',
                         style: GoogleFonts.almarai(
                           textStyle: TextStyle(
                             color: Colors.white,
