@@ -69,7 +69,7 @@ class _WelcomeState extends State<Welcome> {
                     textDirection: TextDirection.rtl,
                     child: DotsIndicator(
                       position: state.page,
-                      dotsCount: 2,
+                      dotsCount: 3,
                       mainAxisAlignment: MainAxisAlignment.center,
                       decorator: DotsDecorator(
 

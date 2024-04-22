@@ -16,7 +16,6 @@ import 'noti_controller.dart';
 Future<void> main() async {
   setupGetIt();
   await ScreenUtil.ensureScreenSize();
-
   await Future.delayed(const Duration(seconds:3));
   await Global.init();
   runApp(const MyApp());
