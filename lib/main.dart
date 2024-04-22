@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
           designSize: const Size(375, 812),
           builder: (context, child) => MaterialApp(
             color: AppColors.primaryBackground,
-           // Specify your desired locale
+           //// Specify your desired locale
             localizationsDelegates: const [
               GlobalCupertinoLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
