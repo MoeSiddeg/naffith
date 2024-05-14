@@ -96,7 +96,7 @@ class _TicketPageState extends State<TicketPage> {
             textDirection: TextDirection.rtl,
             child: Stack(children: [
               SizedBox(
-                height: 812.h * 0.855,
+                height: 812.h * 0.85,
                 child: TabBarView(children: [
                   Scaffold(
                     body: Padding(
@@ -110,7 +110,7 @@ class _TicketPageState extends State<TicketPage> {
                                 setState(() {
                                   selectedType= value;
                                   if(value== "شكوة"){
-                                    tickedType = "complain";
+                                    tickedType = "complaint";
                                   } else {
                                     tickedType = "enquiry";
                                   }
@@ -252,17 +252,23 @@ class _TicketPageState extends State<TicketPage> {
                       }
                       return Column(
                         children: [
-                         SizedBox(
-                              height: 812.h * 0.79,
-                              child: ListView.builder(
-                                padding: EdgeInsets.only(bottom: 10.h),
-                                itemCount: allRealEstatesResponseBody.data!.length,
-                                //   separatorBuilder: (BuildContext context, int index) => const Divider(),
-                                itemBuilder: (context, index) {
-                                  return TicketCard(name: allRealEstatesResponseBody.data![index].agent!.name ?? "", status: 'غير محددة', type: allRealEstatesResponseBody.data![index].type,);
-                                },
-                              ),
+                          SizedBox(
+                            height: 812.h * 0.79,
+                            child: ListView.builder(
+                              padding: EdgeInsets.only(bottom: 10.h),
+                              itemCount: allRealEstatesResponseBody.data!.length,
+                              itemBuilder: (context, index) {
+                                final data = allRealEstatesResponseBody.data![index];
+                                final agentName = data.agent?.name ?? 'غير محدد';
+                                return TicketCard(
+                                  name: agentName,
+                                  status: 'غير محددة',
+                                  type: data.type,
+                                );
+                              },
                             ),
+                          ),
+
 
 
                         ],

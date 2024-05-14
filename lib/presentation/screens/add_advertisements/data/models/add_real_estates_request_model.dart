@@ -24,7 +24,8 @@ class AddRealEstatesRequest {
   final String city_id;
   final String note;
   final String bathroom;
-  final String financing_type;
+  final List<String> financing_type;
+  final List<String?> street_space;
   final String market_price;
   final String private_note;
 
@@ -50,6 +51,7 @@ class AddRealEstatesRequest {
     required this.note,
     required this.bathroom,
     required this.financing_type,
+    required this.street_space ,
     required this.market_price,
     required this.private_note,
   });

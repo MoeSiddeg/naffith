@@ -7,7 +7,13 @@ class OneRealEstateResponse {
     data = json['data'] != null ? new Data.fromJson(json['data']) : null;
   }
 
-
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.data != null) {
+      data['data'] = this.data!.toJson();
+    }
+    return data;
+  }
 }
 
 class Data {
@@ -15,6 +21,7 @@ class Data {
   String? goal;
   String? realEstateStatus;
   String? type;
+  Owner? owner;
   String? subType;
   String? price;
   List<String>? interface;
@@ -32,17 +39,19 @@ class Data {
   String? numberFloors;
   String? electricityMeter;
   String? announcementTime;
-  List<String>? comments;
+  List<Null>? comments;
   List<Images>? images;
-  String? financingType;
+  List<String>? financingType;
   int? marketPrice;
   String? bathroom;
+  List<String>? streetSpace;
 
   Data(
       {this.id,
         this.goal,
         this.realEstateStatus,
         this.type,
+        this.owner,
         this.subType,
         this.price,
         this.interface,
@@ -64,13 +73,15 @@ class Data {
         this.images,
         this.financingType,
         this.marketPrice,
-        this.bathroom});
+        this.bathroom,
+        this.streetSpace});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     goal = json['goal'];
     realEstateStatus = json['real_estate_status'];
     type = json['type'];
+    owner = json['owner'] != null ? new Owner.fromJson(json['owner']) : null;
     subType = json['sub_type'];
     price = json['price'];
     interface = json['interface'].cast<String>();
@@ -95,11 +106,101 @@ class Data {
         images!.add(new Images.fromJson(v));
       });
     }
-    financingType = json['financing_type'];
+    financingType = json['financing_type'].cast<String>();
     marketPrice = json['market_price'];
     bathroom = json['bathroom'];
+    streetSpace = json['street_space'].cast<String>();
   }
 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['goal'] = this.goal;
+    data['real_estate_status'] = this.realEstateStatus;
+    data['type'] = this.type;
+    if (this.owner != null) {
+      data['owner'] = this.owner!.toJson();
+    }
+    data['sub_type'] = this.subType;
+    data['price'] = this.price;
+    data['interface'] = this.interface;
+    data['age'] = this.age;
+    data['private_note'] = this.privateNote;
+    data['note'] = this.note;
+    data['adjective_advertiser'] = this.adjectiveAdvertiser;
+    if (this.state != null) {
+      data['state'] = this.state!.toJson();
+    }
+    if (this.city != null) {
+      data['city'] = this.city!.toJson();
+    }
+    data['water_meter'] = this.waterMeter;
+    data['number_streets'] = this.numberStreets;
+    data['street_spaces'] = this.streetSpaces;
+    data['number_bedrooms'] = this.numberBedrooms;
+    data['floor'] = this.floor;
+    data['number_floors'] = this.numberFloors;
+    data['electricity_meter'] = this.electricityMeter;
+    data['announcement_time'] = this.announcementTime;
+
+    if (this.images != null) {
+      data['images'] = this.images!.map((v) => v.toJson()).toList();
+    }
+    data['financing_type'] = this.financingType;
+    data['market_price'] = this.marketPrice;
+    data['bathroom'] = this.bathroom;
+    data['street_space'] = this.streetSpace;
+    return data;
+  }
+}
+
+class Owner {
+  int? id;
+  String? name;
+  String? email;
+  String? phone;
+  String? image;
+  String? userType;
+  Null? blockedAt;
+  Null? note;
+  String? fcmToken;
+
+  Owner(
+      {this.id,
+        this.name,
+        this.email,
+        this.phone,
+        this.image,
+        this.userType,
+        this.blockedAt,
+        this.note,
+        this.fcmToken});
+
+  Owner.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    email = json['email'];
+    phone = json['phone'];
+    image = json['image'];
+    userType = json['user_type'];
+    blockedAt = json['blocked_at'];
+    note = json['note'];
+    fcmToken = json['fcm_token'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['email'] = this.email;
+    data['phone'] = this.phone;
+    data['image'] = this.image;
+    data['user_type'] = this.userType;
+    data['blocked_at'] = this.blockedAt;
+    data['note'] = this.note;
+    data['fcm_token'] = this.fcmToken;
+    return data;
+  }
 }
 
 class Types {

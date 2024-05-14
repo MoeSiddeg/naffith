@@ -14,6 +14,7 @@ import 'package:naffith/presentation/screens/add_advertisements/widgets/add_real
 import 'package:naffith/presentation/screens/add_advertisements/widgets/large_drop_down.dart';
 import 'package:naffith/presentation/screens/add_advertisements/widgets/reusable_dropdown_with_text.dart';
 import 'package:naffith/presentation/screens/add_advertisements/widgets/reusable_property_field.dart';
+import 'package:naffith/presentation/screens/add_advertisements/widgets/street_drop_down.dart';
 import '../../../common/cities/logic/cities_cubit.dart';
 import '../../../common/cities/logic/cities_states.dart';
 import '../../../common/values/constants_design.dart';
@@ -54,8 +55,47 @@ class _AddAdvertisementLandPageState extends State<AddAdvertisementLandPage> {
     "ثلاث شوارع",
     "اربع شوارع"
   ];
-  String? selectedValue;
 
+  bool oneStreet = false;
+  bool twoStreet = false;
+  bool thereStreet = false;
+  bool fourStreet = false;
+  String? selectedValue;
+  String? selectedStreetOneValue;
+  String? selectedStreetTwoValue;
+  String? selectedStreetThereValue;
+  String? selectedStreetFourValue;
+  List<String?> street_space = [];
+  bool getStreetName(String numbers) {
+    switch (numbers) {
+      case 'شارع':
+        oneStreet = true;
+        twoStreet = false;
+        thereStreet = false;
+        fourStreet = false;
+        return true;
+      case "شارعين":
+        oneStreet = true;
+        twoStreet = true;
+        thereStreet = false;
+        fourStreet = false;
+        return true;
+      case "ثلاث شوارع":
+        oneStreet = true;
+        twoStreet = true;
+        thereStreet = true;
+        fourStreet = false;
+        return true;
+      case "اربع شوارع":
+        oneStreet = true;
+        twoStreet = true;
+        thereStreet = true;
+        fourStreet = true;
+        return true;
+      default:
+        return true;
+    }
+  }
 ///////////////////////////////////////////
   List<String> tamoyl = [];
   String? userType;
@@ -148,14 +188,23 @@ class _AddAdvertisementLandPageState extends State<AddAdvertisementLandPage> {
   // FocusNodes for each TextField
   final _postPriceFocusNode = FocusNode();
 
-  // Validators for each TextField
-  final MultiSelectController<ValueItem> _tamoylController = MultiSelectController<ValueItem>();
 
   final List<ValueItem> _selectedOptionsTamoyl = [];
   List<String> _selectedItemsTamoyl = [];
-  final MultiSelectController<ValueItem> _wajahController = MultiSelectController<ValueItem>();
+
 
   final List<ValueItem> _selectedOptionsWajah = [];
+  final List<ValueItem<String>> optionsWajah = [
+    ValueItem(label: 'الشرق', value: '1'),
+    ValueItem(label: 'الشمال', value: '2'),
+    ValueItem(label: 'الغرب', value: '3'),
+    ValueItem(label: 'الجنوب', value: '4'),
+  ];
+  final List<ValueItem<String>> optionsTamoyl = [
+    ValueItem(label: 'كاش', value: '1'),
+    ValueItem(label: 'بنك', value: '2'),
+
+  ];
   List<String> _selectedItemsWajah = [];
   String? _postPriceValidator(String? value) {
     if (value == null || value.isEmpty) {
@@ -728,12 +777,11 @@ class _AddAdvertisementLandPageState extends State<AddAdvertisementLandPage> {
                             ),
                           ),
                           SizedBox(height: 5.h,),
-                          MultiSelectDropDown(
+                          MultiSelectDropDown<String>(
                             borderWidth: 1,
                             hint: 'التمويل',
                             clearIcon: null,
-                            controller: _tamoylController,
-                            onOptionSelected: (List<ValueItem> options) {
+                            onOptionSelected: (List<ValueItem<String>> options) {
                               setState(() {
                                 _selectedOptionsTamoyl.clear();
                                 _selectedOptionsTamoyl.addAll(options);
@@ -742,10 +790,7 @@ class _AddAdvertisementLandPageState extends State<AddAdvertisementLandPage> {
                               });
                               debugPrint(_selectedOptionsTamoyl.toString());
                             },
-                            options: const <ValueItem>[
-                              ValueItem(label: 'بنك', value: '1'),
-                              ValueItem(label: 'كاش', value: '2'),
-                            ],
+                            options:optionsTamoyl,
                             maxItems: 2,
                             singleSelectItemStyle: GoogleFonts.almarai(
                               textStyle: TextStyle(
@@ -834,7 +879,7 @@ class _AddAdvertisementLandPageState extends State<AddAdvertisementLandPage> {
                 height: 5.h,
               ),
               Padding(
-                padding: EdgeInsets.only(right: 8.w),
+                padding: EdgeInsets.only(right: 6.5.w),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -861,27 +906,21 @@ class _AddAdvertisementLandPageState extends State<AddAdvertisementLandPage> {
                               ),
                             ),
                             SizedBox(height: 5.h,),
-                            MultiSelectDropDown(
+                            MultiSelectDropDown<String>(
                               borderWidth: 1,
                               hint: 'الواجهة',
                               clearIcon: null,
-                              controller: _wajahController,
-                              onOptionSelected: (List<ValueItem> options) {
+                              onOptionSelected: (List<ValueItem<String>> selectedOptions) {
                                 setState(() {
                                   _selectedOptionsWajah.clear();
-                                  _selectedOptionsWajah.addAll(options);
-                                  _selectedItemsWajah = options.map((item) => item.label).toList();
+                                  _selectedOptionsWajah.addAll(selectedOptions);
+                                  _selectedItemsWajah = selectedOptions.map((item) => item.label).toList();
                                   debugPrint(_selectedItemsWajah.toString()); // Print for debugging
                                 });
                                 debugPrint(_selectedOptionsTamoyl.toString());
                               },
-                              options: const <ValueItem>[
-                                ValueItem(label: 'الشرق', value: '1'),
-                                ValueItem(label: 'الغرب', value: '2'),
-                                ValueItem(label: 'الشمال', value: '1'),
-                                ValueItem(label: 'الجنوب', value: '2'),
-                              ],
-                              maxItems: 2,
+                              options:optionsWajah,
+                              maxItems: 4,
                               singleSelectItemStyle: GoogleFonts.almarai(
                                 textStyle: TextStyle(
                                   color: AppColors.primaryBackground,
@@ -973,10 +1012,8 @@ class _AddAdvertisementLandPageState extends State<AddAdvertisementLandPage> {
                           stateValue == null ||
                           selectedCity == null ||
                           _postPriceController.text.isEmpty ||
-                          tamoyl.isEmpty ||
-                          selectedInterface.isEmpty ||
-                          tamoyl.isEmpty ||
-                          selectedInterface.isEmpty) {
+                          _selectedItemsTamoyl.isEmpty ||
+                          _selectedItemsWajah.isEmpty){
                         setupErrorState(context);
                       } else {
                         pageController.animateToPage(index,
@@ -1032,7 +1069,7 @@ class _AddAdvertisementLandPageState extends State<AddAdvertisementLandPage> {
             children: [
               Padding(
                 padding: EdgeInsets.only(top: 15.h, bottom: 10.h),
-                child: Row(
+                child:     Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     PropertyTypeDropdown(
@@ -1042,21 +1079,100 @@ class _AddAdvertisementLandPageState extends State<AddAdvertisementLandPage> {
                       onChanged: (String? value) {
                         setState(() {
                           selectedValue = value;
+                          street_space.clear();
+                          getStreetName(value!);
                         });
                       },
                     ),
-                    PropertyTypeDropdown(
-                      selectedValue: streetAreaValue,
-                      textWidgetString: 'عرض الشوارع',
+                    // PropertyTypeDropdown(
+                    //   selectedValue: streetAreaValue,
+                    //   textWidgetString: 'عرض الشوارع',
+                    //   items: streetAreaGenerateList(),
+                    //   onChanged: (String? value) {
+                    //     setState(() {
+                    //       streetAreaValue = value;
+                    //     });
+                    //   },
+                    // ),
+                  ],
+                ),
+              ),
+              if(oneStreet)
+                Padding(
+                  padding: EdgeInsets.only(top: 15.h, bottom: 5.h),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(right: 5.w, left: 10.w),
+                        child: Text(
+                          'مساحة الشوارع',
+                          style: GoogleFonts.almarai(
+                            textStyle: TextStyle(
+                              color: AppColors.primaryBackground,
+                              letterSpacing: 0,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  if(oneStreet)
+                    StreetTypeDropdown(
+                      selectedValue: selectedStreetOneValue,
+                      textWidgetString: 'الاول',
                       items: streetAreaGenerateList(),
                       onChanged: (String? value) {
                         setState(() {
-                          streetAreaValue = value;
+                          selectedStreetOneValue = value;
+                          street_space.add(selectedStreetOneValue);
                         });
                       },
                     ),
-                  ],
-                ),
+                  if(twoStreet)
+                    StreetTypeDropdown(
+                      selectedValue: selectedStreetTwoValue,
+                      textWidgetString: 'الثاني',
+                      items: streetAreaGenerateList(),
+                      onChanged: (String? value) {
+                        setState(() {
+                          selectedStreetTwoValue = value;
+                          street_space.add(selectedStreetTwoValue);
+                        });
+                      },
+                    ),
+                  if(thereStreet)
+                    StreetTypeDropdown(
+                      selectedValue: selectedStreetThereValue,
+                      textWidgetString: 'الثالث',
+                      items: streetAreaGenerateList(),
+                      onChanged: (String? value) {
+                        setState(() {
+                          selectedStreetThereValue = value;
+                          street_space.add(selectedStreetTwoValue);
+                        });
+                      },
+                    ),
+                  if(fourStreet)
+                    StreetTypeDropdown(
+                      selectedValue: selectedStreetFourValue,
+                      textWidgetString: 'الرابع',
+                      items: streetAreaGenerateList(),
+                      onChanged: (String? value) {
+                        setState(() {
+                          selectedStreetFourValue = value;
+                          street_space.add(selectedStreetTwoValue);
+                        });
+                      },
+                    ),
+                ],
               ),
               ReusablePropertyField(
                 label: 'الملاحظات ',
@@ -1124,9 +1240,8 @@ class _AddAdvertisementLandPageState extends State<AddAdvertisementLandPage> {
                       setState(() {
                         if (_commentsController.text.isNotEmpty &&
                             _privetNoteController.text.isNotEmpty &&
-                            streetAreaValue != null &&
-                            selectedValue != null &&
-                            selectedArea != null) {
+                            street_space.isNotEmpty &&
+                            selectedValue != null) {
                           pageController.animateToPage(index,
                               duration: const Duration(milliseconds: 500),
                               curve: Curves.easeIn);
@@ -1943,7 +2058,7 @@ class _AddAdvertisementLandPageState extends State<AddAdvertisementLandPage> {
                         interface: _selectedItemsWajah,
                         water_meter: _waterMeterValue!,
                         number_streets: selectedValue!,
-                        street_spaces: streetAreaValue!,
+                        street_spaces: '0',
                         electricity_meter: _electricMeterValue!,
                         adjective_advertiser: userType!,
                         type: 'land',
@@ -1953,7 +2068,8 @@ class _AddAdvertisementLandPageState extends State<AddAdvertisementLandPage> {
                         data_validity: '1',
                         note: _commentsController.text,
                         bathroom: '3',
-                        financing_type: 'كاش',
+                        financing_type: _selectedItemsTamoyl,
+                        street_space: street_space,
                         private_note: _privetNoteController.text,
                         market_price: _scendagree ? '1' : '0',
                       ),

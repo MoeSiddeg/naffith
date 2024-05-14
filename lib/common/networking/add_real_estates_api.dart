@@ -55,7 +55,6 @@ class AddRealApiService {
       formData.fields.add(MapEntry('data_validity', addRealEstatesRequest.data_validity));
       formData.fields.add(MapEntry('private_note', addRealEstatesRequest.private_note));
       formData.fields.add(MapEntry('note', addRealEstatesRequest.note));
-      formData.fields.add(MapEntry('financing_type', addRealEstatesRequest.financing_type));
       formData.fields.add(MapEntry('market_price', addRealEstatesRequest.market_price));
       formData.fields.add(MapEntry('bathroom', addRealEstatesRequest.bathroom));
 
@@ -78,6 +77,14 @@ class AddRealApiService {
       // Add interface
       for (int i = 0; i < addRealEstatesRequest.interface.length; i++) {
         formData.fields.add(MapEntry('interface[$i]', addRealEstatesRequest.interface[i]));
+      }
+      // TAMOYL
+      for (int i = 0; i < addRealEstatesRequest.financing_type.length; i++) {
+        formData.fields.add(MapEntry('financing_type[$i]', addRealEstatesRequest.financing_type[i]));
+      }
+      // TAMOYL
+      for (int i = 0; i < addRealEstatesRequest.street_space.length; i++) {
+        formData.fields.add(MapEntry('street_space[$i]', addRealEstatesRequest.street_space[i]!));
       }
 
       // Make the API call using Dio

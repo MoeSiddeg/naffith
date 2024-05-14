@@ -84,7 +84,7 @@ class TicketCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('$name',style: GoogleFonts.almarai(
+                        Text(name ?? "غير محدد",style: GoogleFonts.almarai(
                             textStyle: TextStyle(
                               color: AppColors.primaryBackground,
                               letterSpacing: 0,

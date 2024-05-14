@@ -48,7 +48,17 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
   final stageOneFormKey = GlobalKey<FormState>();
   final stageTwoFormKey = GlobalKey<FormState>();
   final stageThereFormKey = GlobalKey<FormState>();
+  final List<ValueItem<String>> optionsWajah = [
+    ValueItem(label: 'الشرق', value: '1'),
+    ValueItem(label: 'الشمال', value: '2'),
+    ValueItem(label: 'الغرب', value: '3'),
+    ValueItem(label: 'الجنوب', value: '4'),
+  ];
+  final List<ValueItem<String>> optionsTamoyl = [
+    ValueItem(label: 'كاش', value: '1'),
+    ValueItem(label: 'بنك', value: '2'),
 
+  ];
   //streets bool
   bool oneStreet = false;
   bool twoStreet = false;
@@ -58,6 +68,7 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
   String? selectedStreetTwoValue;
   String? selectedStreetThereValue;
   String? selectedStreetFourValue;
+  List<String?> street_space = [];
   bool getStreetName(String numbers) {
     switch (numbers) {
       case 'شارع':
@@ -786,26 +797,20 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                           SizedBox(
                             height: 5.h,
                           ),
-                          MultiSelectDropDown(
+                          MultiSelectDropDown<String>(
                             borderWidth: 1,
                             hint: 'التمويل',
                             clearIcon: null,
-                            controller: _tamoylController,
-                            onOptionSelected: (List<ValueItem> options) {
+                            onOptionSelected: (List<ValueItem<String>> options) {
                               setState(() {
                                 _selectedOptionsTamoyl.clear();
                                 _selectedOptionsTamoyl.addAll(options);
-                                _selectedItemsTamoyl =
-                                    options.map((item) => item.label).toList();
-                                debugPrint(_selectedItemsTamoyl
-                                    .toString()); // Print for debugging
+                                _selectedItemsTamoyl = options.map((item) => item.label).toList();
+                                debugPrint(_selectedItemsTamoyl.toString()); // Print for debugging
                               });
                               debugPrint(_selectedOptionsTamoyl.toString());
                             },
-                            options: const <ValueItem>[
-                              ValueItem(label: 'بنك', value: '1'),
-                              ValueItem(label: 'كاش', value: '2'),
-                            ],
+                            options:optionsTamoyl,
                             maxItems: 2,
                             singleSelectItemStyle: GoogleFonts.almarai(
                               textStyle: TextStyle(
@@ -815,13 +820,12 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
-                            chipConfig: ChipConfig(
-                                deleteIcon: null,
+                            chipConfig:  ChipConfig(
+                                deleteIcon: null ,
                                 deleteIconColor: Colors.transparent,
                                 padding: EdgeInsets.only(right: 10.w),
-                                wrapType: WrapType.scroll,
-                                backgroundColor: AppColors.primaryBackground),
-                            optionTextStyle: GoogleFonts.almarai(
+                                wrapType: WrapType.scroll, backgroundColor: AppColors.primaryBackground),
+                            optionTextStyle:  GoogleFonts.almarai(
                               textStyle: TextStyle(
                                 color: AppColors.primaryBackground,
                                 letterSpacing: 0,
@@ -834,14 +838,8 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                               return ListTile(
                                 title: Text(valueItem.label),
                                 trailing: isSelected
-                                    ? const Icon(
-                                        Icons.check_circle,
-                                        color: AppColors.primaryBackground,
-                                      )
-                                    : const Icon(
-                                        Icons.radio_button_unchecked,
-                                        color: AppColors.primaryBackground,
-                                      ),
+                                    ? const Icon(Icons.check_circle , color: AppColors.primaryBackground,)
+                                    : const Icon(Icons.radio_button_unchecked , color: AppColors.primaryBackground,),
                               );
                             },
                           )
@@ -941,28 +939,20 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                         SizedBox(
                           height: 5.h,
                         ),
-                        MultiSelectDropDown(
+                        MultiSelectDropDown<String>(
                           borderWidth: 1,
                           hint: 'الواجهة',
                           clearIcon: null,
-                          controller: _wajahController,
-                          onOptionSelected: (List<ValueItem> options) {
+                          onOptionSelected: (List<ValueItem<String>> selectedOptions) {
                             setState(() {
                               _selectedOptionsWajah.clear();
-                              _selectedOptionsWajah.addAll(options);
-                              _selectedItemsWajah =
-                                  options.map((item) => item.label).toList();
-                              debugPrint(_selectedItemsWajah
-                                  .toString()); // Print for debugging
+                              _selectedOptionsWajah.addAll(selectedOptions);
+                              _selectedItemsWajah = selectedOptions.map((item) => item.label).toList();
+                              debugPrint(_selectedItemsWajah.toString()); // Print for debugging
                             });
                             debugPrint(_selectedOptionsTamoyl.toString());
                           },
-                          options: const <ValueItem>[
-                            ValueItem(label: 'الشرق', value: '1'),
-                            ValueItem(label: 'الغرب', value: '2'),
-                            ValueItem(label: 'الشمال', value: '1'),
-                            ValueItem(label: 'الجنوب', value: '2'),
-                          ],
+                          options:optionsWajah,
                           maxItems: 4,
                           singleSelectItemStyle: GoogleFonts.almarai(
                             textStyle: TextStyle(
@@ -972,13 +962,12 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                               fontWeight: FontWeight.w700,
                             ),
                           ),
-                          chipConfig: ChipConfig(
-                              deleteIcon: null,
+                          chipConfig:  ChipConfig(
+                              deleteIcon: null ,
                               deleteIconColor: Colors.transparent,
                               padding: EdgeInsets.only(right: 10.w),
-                              wrapType: WrapType.scroll,
-                              backgroundColor: AppColors.primaryBackground),
-                          optionTextStyle: GoogleFonts.almarai(
+                              wrapType: WrapType.scroll, backgroundColor: AppColors.primaryBackground),
+                          optionTextStyle:  GoogleFonts.almarai(
                             textStyle: TextStyle(
                               color: AppColors.primaryBackground,
                               letterSpacing: 0,
@@ -991,14 +980,8 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                             return ListTile(
                               title: Text(valueItem.label),
                               trailing: isSelected
-                                  ? const Icon(
-                                      Icons.check_circle,
-                                      color: AppColors.primaryBackground,
-                                    )
-                                  : const Icon(
-                                      Icons.radio_button_unchecked,
-                                      color: AppColors.primaryBackground,
-                                    ),
+                                  ? const Icon(Icons.check_circle , color: AppColors.primaryBackground,)
+                                  : const Icon(Icons.radio_button_unchecked , color: AppColors.primaryBackground,),
                             );
                           },
                         )
@@ -1188,6 +1171,7 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                     onChanged: (String? value) {
                       setState(() {
                         selectedValue = value;
+                        street_space.clear();
                         getStreetName(value!);
                       });
                     },
@@ -1239,6 +1223,7 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                         onChanged: (String? value) {
                           setState(() {
                             selectedStreetOneValue = value;
+                            street_space.add(selectedStreetOneValue);
                           });
                         },
                       ),
@@ -1250,6 +1235,7 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                         onChanged: (String? value) {
                           setState(() {
                             selectedStreetTwoValue = value;
+                            street_space.add(selectedStreetTwoValue);
                           });
                         },
                       ),
@@ -1261,6 +1247,7 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                         onChanged: (String? value) {
                           setState(() {
                             selectedStreetThereValue = value;
+                            street_space.add(selectedStreetTwoValue);
                           });
                         },
                       ),
@@ -1272,6 +1259,7 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                         onChanged: (String? value) {
                           setState(() {
                             selectedStreetFourValue = value;
+                            street_space.add(selectedStreetTwoValue);
                           });
                         },
                       ),
@@ -1336,7 +1324,6 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                       setState(() {
                         if (selectedArea != null &&
                             selectedValue != null &&
-                            streetAreaValue != null &&
                             bathRoomValue != null &&
                             bedRoomValue != null &&
                             selectFloor != null &&
@@ -2258,7 +2245,7 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                         interface: _selectedItemsWajah,
                         water_meter: _waterMeterValue!,
                         number_streets: selectedValue!,
-                        street_spaces: streetAreaValue!,
+                        street_spaces: '0',
                         number_bedrooms: bedRoomValue!,
                         floor: selectFloor!,
                         number_floors: selectedFloorNumber!,
@@ -2272,7 +2259,8 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                         data_validity: '1',
                         note: _commentsController.text,
                         bathroom: bathRoomValue!,
-                        financing_type: 'كاش',
+                        financing_type: _selectedItemsTamoyl,
+                        street_space: street_space,
                         private_note: _privetNoteController.text,
                         market_price: _scendagree! ? "0" : '1',
                       ),

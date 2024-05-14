@@ -30,7 +30,12 @@ AddRealEstatesRequest _$AddRealEstatesRequestFromJson(
       city_id: json['city_id'] as String,
       note: json['note'] as String,
       bathroom: json['bathroom'] as String,
-      financing_type: json['financing_type'] as String,
+      financing_type: (json['financing_type'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      street_space: (json['street_space'] as List<dynamic>)
+          .map((e) => e as String?)
+          .toList(),
       market_price: json['market_price'] as String,
       private_note: json['private_note'] as String,
     );
@@ -59,6 +64,7 @@ Map<String, dynamic> _$AddRealEstatesRequestToJson(
       'note': instance.note,
       'bathroom': instance.bathroom,
       'financing_type': instance.financing_type,
+      'street_space': instance.street_space,
       'market_price': instance.market_price,
       'private_note': instance.private_note,
     };

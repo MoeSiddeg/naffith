@@ -64,7 +64,7 @@ class Agent {
   String? userType;
   Null? blockedAt;
   Null? note;
-  Null? fcmToken;
+  String? fcmToken;
 
   Agent(
       {this.id,
