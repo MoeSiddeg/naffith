@@ -1771,12 +1771,7 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        if (userType == 'seller_agent' ||
-                            userType == 'buyer_agent' &&
-                                context.read<GetFaalCubit>().isHaveFaal ==
-                                    false) {
-                          setupErrorFaalState(context);
-                        } else if (_electricMeterValue == null ||
+                       if (_electricMeterValue == null ||
                             _waterMeterValue == null ||
                             selectedUserType == null ||
                             _firstagree != true ||

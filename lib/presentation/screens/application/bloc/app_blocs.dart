@@ -1,6 +1,5 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'app_events.dart';
 import 'app_states.dart';
 

@@ -27,7 +27,6 @@ class _ApplicationPageState extends State<ApplicationPage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppBlocs, AppState>(builder: (context, state){
-
       return PopScope(
         canPop:  false,
         child: Container(
